@@ -1,0 +1,24 @@
+<!--
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">Skip</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+--> 
+
+<ion-content no-bounce cover__disclaimer>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" >
+
+    <ion-slide>
+      <!-- <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/> -->
+        <h2 class="slide-title">DISCLAIMER</h2>
+      
+        <p align__center>GenoMaxx Fitness includes interactive workouts designed to improve overall health &amp; wellness. Some of these workouts are highly intense. Your health is very important to us. Please consult your physician before starting your tailored exercise program.</p>
+
+      <button ion-button icon-end block clear data__button--ok (click)="startApp()"> OK </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "GenomaxxFitness",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

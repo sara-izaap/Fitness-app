@@ -1,0 +1,89 @@
+$categories: (
+ ionic: color($colors, primary),
+ angular: #AC282B,
+ communication: #8E8D93,
+ tooling: #FE4C52,
+ services: #FD8B2D,
+ design: #FED035,
+ workshop: #69BB7B,
+ food: #3BC7C4,
+ documentation: #B16BE3,
+ navigation: #6600CC,
+);
+
+@function auxiliary-categories() {
+  @return map-remove($categories);
+}
+
+page-schedule {
+  @each $track, $value in auxiliary-categories() {
+   ion-item-sliding[track=#{$track}] ion-label {
+     border-left: 2px solid $value;
+     padding-left: 10px;
+   }
+  }
+}
+
+
+[custom__col] {
+		text-align: center;
+
+		img {
+			max-width:85px;
+		}
+
+	h3 {
+		text-transform: uppercase;
+		color:#000;
+		font-size:14px;
+
+		&:before {
+			content:attr(get__text);
+			display: block;
+			color:#bfbfbf;
+			font-size:14px;
+			padding-bottom: 5px;
+		}
+	}
+}
+
+
+.data__shadow {
+   margin: 10px;
+   box-shadow: 0 0 5px 2px #ddd;
+
+   [col-6]:nth-child(odd)  {
+		border-right:1px solid #ddd;
+		border-bottom:1px solid #ddd;
+   }
+
+	[col-6]:nth-child(even)  {
+		border-bottom:1px solid #ddd;
+	}
+}
+
+
+.activiti__bg {
+	padding-top: 150px;
+	// background:#252525 url(assets/img/activity__bg.jpg) no-repeat;
+	background:#212121 url(../assets/img/activity__bg.png) no-repeat;
+	background-size:cover;
+	position: relative;
+	overflow:hidden;
+
+	&:before {
+	    content:"";
+	    width:100vw;
+	    height:100vh;
+	    background-color:rgba(0, 0, 0, 0.7);
+	    position:absolute;
+	    left:0;
+	    top:0;
+	  }	  
+}
+
+.activiti__bg {
+	[data__tab-custom] {
+		
+	}
+}

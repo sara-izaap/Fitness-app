@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="activiti__bg">
+    <!-- <h1>Welcome</h1> -->
+
+      <ion-segment [(ngModel)]="segment"  fab fab-fixed data__tab-custom>
+        <ion-segment-button value="start" > Start </ion-segment-button>
+        <ion-segment-button value="activity"> Activity </ion-segment-button>
+      </ion-segment>
+
+  </div>
+  
+
+
+
+
+
+  <ion-list *ngIf="segment === 'start'">
+
+    <!-- <ion-item>
+        <ion-icon name="paper" item-left></ion-icon>
+        <h2 class="card-title">Workout</h2>
+        <p>srfthyutjtuyjtyj</p>
+    </ion-item> -->
+
+    <ion-grid>
+    <div class="data__shadow">
+      <ion-row>
+          <ion-col col-6>
+            <div custom__col>
+              <img src="assets/img/icon__workout.png" alt="">
+              <h3 get__text="Start">Workout</h3>
+            </div>
+          </ion-col>
+          
+          <ion-col col-6>
+            <div custom__col>
+              <img src="assets/img/icon__nutrition.png" alt="">
+              <h3 get__text="Start">Nutrition</h3>
+            </div>
+          </ion-col>
+
+          <ion-col col-6>
+            <div custom__col>
+              <img src="assets/img/icon__pic.png" alt="">
+              <h3 get__text="Add">Progress Pic.</h3>
+            </div>
+          </ion-col>
+          
+          <ion-col col-6>
+            <div custom__col>
+              <img src="assets/img/icon__measurements.png" alt="">
+              <h3 get__text="Update">Measurements</h3>
+            </div>
+          </ion-col>
+
+          <ion-col col-6>
+            <div custom__col>
+              <img src="assets/img/icon__report.png" alt="">
+              <h3 get__text="DNA">Report</h3>
+            </div>
+          </ion-col>
+          
+          <ion-col col-6>
+            <div custom__col>
+              <img src="assets/img/icon__consultation.png" alt="">
+              <h3 get__text="Request">Consultation</h3>
+            </div>
+          </ion-col>
+
+      </ion-row>
+    </div>
+  
+</ion-grid>
+
+  </ion-list>
+
+  <ion-list *ngIf="segment === 'activity'">
+    
+    <ion-item *ngFor="let log of activity">
+        <h2 class="card-title">{{log.action}}</h2>
+        <p>{{log.message}}</p>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list-header *ngIf="!activity">
+      No activities Found
+  </ion-list-header>
+
+</ion-content>

@@ -1,0 +1,79 @@
+$categories: (
+ ionic: color($colors, primary),
+ angular: #AC282B,
+ communication: #8E8D93,
+ tooling: #FE4C52,
+ services: #FD8B2D,
+ design: #FED035,
+ workshop: #69BB7B,
+ food: #3BC7C4,
+ documentation: #B16BE3,
+ navigation: #6600CC,
+);
+
+@function auxiliary-categories() {
+  @return map-remove($categories);
+}
+
+page-schedule {
+  @each $track, $value in auxiliary-categories() {
+   ion-item-sliding[track=#{$track}] ion-label {
+     border-left: 2px solid $value;
+     padding-left: 10px;
+   }
+  }
+}
+
+
+ion-segment {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+
+
+[data-settings] {
+  background:url(../assets/img/cover__settings.jpg) no-repeat;
+  background-size:cover;
+
+  &:before {
+    content:"";
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0, 0, 0, 0.7);
+    position:absolute;
+    left:0;
+    top:0;
+  }
+ }
+
+
+ [ion-list] {
+ 	[ion-item] {
+ 		background-color:rgba(255, 255, 255, 0) !important;
+		
+		ion-label {
+			//text-transform: uppercase;
+			//text-align: right;
+      color:#fff;
+		}
+		
+		.text-input,.datetime-text {
+			background:rgba(27, 117, 187, 0.5);
+			border-radius:5px;
+			padding: 5px;
+			color:#fff !important;
+		}
+
+
+ 	}
+  ion-list-header{ margin-bottom: 1px !important; }
+
+ }
+
+.item.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, 
+.item.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.list .item-block .item-inner {
+  border:0 !important;
+  box-shadow:0 0 0 transparent;
+}

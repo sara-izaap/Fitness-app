@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content data-settings>
+
+  <ion-segment [(ngModel)]="segment" fab fab-fixed>
+    <ion-segment-button value="account" >
+      Account
+    </ion-segment-button>
+    <ion-segment-button value="notification">
+      Notifications
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list *ngIf="segment === 'account'" ion-list>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">First Name</ion-label>
+        <ion-input [(ngModel)]="account.first_name" name="first_name" type="text" spellcheck="false">
+        </ion-input>
+      </ion-item>
+
+     <ion-item ion-item>
+        <ion-label stacked color="primary">Last Name</ion-label>
+        <ion-input [(ngModel)]="account.last_name" name="last_name" type="text" spellcheck="false">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Address1</ion-label>
+        <ion-input [(ngModel)]="account.address1" name="address1" type="text" spellcheck="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Address2</ion-label>
+        <ion-input [(ngModel)]="account.address2" name="address2" type="text" spellcheck="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">City</ion-label>
+        <ion-input [(ngModel)]="account.city" name="city" type="text" spellcheck="true">
+        </ion-input>
+      </ion-item>
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Zipcode</ion-label>
+        <ion-input [(ngModel)]="account.zipcode" name="zipcode" type="text" spellcheck="false">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Country</ion-label>
+        <ion-input [(ngModel)]="account.country" name="country" type="text" spellcheck="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Timezone</ion-label>
+        <ion-input [(ngModel)]="account.time_zone" name="time_zone" type="text" spellcheck="false">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Date of birth</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="account.dob" name="dob"></ion-datetime>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Phone</ion-label>
+        <ion-input [(ngModel)]="account.phone" name="phone" type="tel" spellcheck="false">
+        </ion-input>
+      </ion-item>
+
+      <ion-item ion-item>
+        <ion-label stacked color="primary">Goal</ion-label>
+        <ion-input [(ngModel)]="account.goal" name="goal" type="text" spellcheck="false">
+        </ion-input>
+      </ion-item>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="onSubmit()" block>Save Changes</button>
+        </ion-col>
+
+      </ion-row>
+
+  </ion-list>
+
+  <ion-list *ngIf="segment === 'notification'" ion-list>
+
+    <ion-list-header>Notifications</ion-list-header>
+
+    <ion-item *ngFor="let track of tracks" [attr.track]="track.attribute">
+      <ion-label>{{track.name}}</ion-label>
+      <ion-toggle [(ngModel)]="track.isChecked" color="primary"></ion-toggle>
+    </ion-item>
+
+    <ion-list-header>Emails</ion-list-header>
+
+     <ion-item *ngFor="let track of emailtracks" [attr.track]="track.attribute">
+      <ion-label>{{track.name}}</ion-label>
+      <ion-toggle [(ngModel)]="track.isChecked" color="primary"></ion-toggle>
+
+      <!--
+      <ion-select [(ngModel)]="track.attribute" (ionChange)="track.delivery=track.attribute">
+        <ion-option *ngFor="let slot of delivery_slots"  value="slot.id" >{{slot.name}}</ion-option>      
+      </ion-select>
+      -->
+
+    </ion-item>
+
+    <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="notificationSave()" block>Save Changes</button>
+        </ion-col>
+
+    </ion-row>
+
+  </ion-list>
+
+</ion-content>

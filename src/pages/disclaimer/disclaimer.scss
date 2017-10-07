@@ -1,0 +1,68 @@
+[cover__disclaimer] {
+
+  background:#212121 url(../assets/img/cover__disclaimer.jpg) no-repeat;
+  background-size:cover;
+
+  &:before {
+    content:""; 
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0, 0, 0, 0.7);
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
+
+.slide-title {
+    margin-top: 2.8rem;
+    color:#fff;
+  }
+
+page-tutorial {
+  .toolbar-background {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .slide-zoom {
+    height: 100%;
+  }
+
+
+
+  .slide-image {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  p {
+    padding: 0 40px;
+    font-size: 14px;
+    line-height: 1.5;
+    // color: #fff !important;
+
+    b {
+      color: #000000;
+    }
+  }
+
+}
+
+[align__center] {
+  text-align: center;
+  color:#fff;
+}
+
+[data__button--ok] {
+  background-color:#fff;
+  max-width: 85px;
+  margin: 0 auto;
+  color:#000;
+  font-weight:bold;
+}

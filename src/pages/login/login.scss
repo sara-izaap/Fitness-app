@@ -1,0 +1,112 @@
+// Styles for all of the user pages:
+// Login, Signup, Support
+
+page-user {
+  .logo {
+    padding: 20px 0;
+    // min-height: 200px;
+    text-align: center;
+
+    img {
+      max-width: 260px;
+    }
+  }
+
+  .list {
+    margin-bottom: 0;
+
+      ion-item {
+        margin-bottom: 25px;
+        border-radious:30px;
+      }
+  }
+}
+
+.logo__caption {
+  text-align:center;
+  padding-bottom:25px;
+  color:#fff;
+}
+
+[data-login] {
+  background:#212121 url(../assets/img/cover__login.jpg) no-repeat;
+  background-size:cover;
+
+  &:before {
+    content:"";
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0, 0, 0, 0.7);
+    position:absolute;
+    left:0;
+    top:0;
+  }
+
+
+  form {
+    padding:0 25px;
+
+    ion-item {
+      background-color: rgba(27, 117, 187, 0.5);
+      border-radius:5px;
+      padding-left: 35px;
+    }
+
+    .text-input  {
+      color:#fff;
+    }
+  }
+}
+
+[data-user] {
+  background: url(../assets/img/login__user.png) no-repeat left center;
+}
+
+[data-pass] {
+  background:url(../assets/img/login__password.png) no-repeat left center;
+}
+
+[data__gradient--blue] {
+  background: #00adee; 
+  background: -webkit-linear-gradient(to bottom, #00adee, #197ac0); 
+  background: linear-gradient(to bottom, #00adee, #197ac0);
+}
+
+[data__gradient--gray] {
+  background-color: rgba(255, 255, 255, 0.3);
+  color:#fff;
+}
+
+[data__button--medium] {
+  max-width: 200px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+[data__center] {
+  text-align: center;
+  position: relative;
+  color:#fff;
+
+  &:before,
+  &:after {
+    content: "";
+    border: 1px solid #fff;
+    position: absolute;
+    display: inline-block;
+    width: 35%;
+    top: 50%;
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
+}
+
+// 1b75bb
+
+

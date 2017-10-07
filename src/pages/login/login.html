@@ -1,0 +1,52 @@
+
+<ion-content data-login>
+	<div class="logo">
+		<img src="assets/img/logo.png" alt="Ionic logo">
+	</div>
+
+	<div class="logo__caption">ACTIVATE YOUR GENES TO THEIR HIGHEST POTENTIAL.</div>
+	
+
+	<form #loginForm="ngForm" novalidate>
+		<ion-list >
+			<ion-item data-user>
+				<!-- <ion-label stacked color="primary">Email</ion-label> -->
+				<ion-input [(ngModel)]="login.email" name="email" type="text" #email="ngModel" spellcheck="false" autocapitalize="off" placeholder="Email"
+					required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="email.valid || submitted == false" color="danger" padding-left>
+				Email is required
+			</p>
+
+			<ion-item data-pass>
+				<!-- <ion-label stacked color="primary">Password</ion-label> -->
+				<ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" placeholder="Password" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+				Password is required
+			</p>
+		</ion-list>
+
+		<ion-row responsive-sm>
+			<ion-col>
+				<button ion-button (click)="onLogin(loginForm)" type="submit" block data__gradient--blue>Login</button>
+			</ion-col>
+			
+		</ion-row>
+		
+		<ion-row responsive-sm>
+			<ion-col>
+				<p data__center>or</p>
+			</ion-col>
+		</ion-row>		
+
+		<ion-row responsive-sm>
+			<ion-col>
+				<button ion-button color="light" block data__gradient--gray data__button--medium>Forgot your password?</button>
+			</ion-col>
+		</ion-row>
+	</form>
+
+</ion-content>

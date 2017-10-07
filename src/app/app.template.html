@@ -1,0 +1,42 @@
+<ion-split-pane>
+
+  <!-- logged out menu -->
+  <ion-menu id="loggedOutMenu" [content]="content" data__menu>
+
+    <ion-header>
+      <ion-toolbar>
+        <!-- <ion-title>Menu</ion-title> -->
+        <div class="custom__header">
+        <img src="https://uinames.com/api/photos/female/30.jpg" user__pic circle alt="">
+          <h3>{{logindata.first_name}}</h3>
+          <h5>{{logindata.email}}</h5>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content class="outer-content">
+
+      <ion-list>
+        <!-- <ion-list-header>
+          Navigate
+        </ion-list-header> -->
+        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+          <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          {{p.title}}
+        </button>
+        <button ion-item menuClose  (click)="logOut()">
+          <ion-icon item-start name="log-out" ></ion-icon>
+          Logout
+        </button>
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+
+  <!-- main navigation -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main name="app"></ion-nav>
+
+</ion-split-pane>
