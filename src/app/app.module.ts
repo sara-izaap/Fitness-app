@@ -15,10 +15,13 @@ import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/settings/settings';
 import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
 import { MyhubPage } from '../pages/myhub/myhub';
+import { MessagesPage } from '../pages/messages/messages';
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
-import { AuthService } from '../providers/authService';
+import { AuthService } from '../providers/authService'; 
+ 
+
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { AuthService } from '../providers/authService';
     LoginPage,
     MyhubPage,
     SettingsPage,
-    DisclaimerPage
+    DisclaimerPage,
+    MessagesPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ import { AuthService } from '../providers/authService';
             { component: LoginPage, name: 'LoginPage', segment: 'login' },
             { component: DisclaimerPage, name: 'Disclaimer', segment: 'disclaimer' },
             { component: MyhubPage, name: 'MyhubPage', segment: 'myhub' },
-            { component: SettingsPage, name: 'SettingsPage', segment: 'settings' }
+            { component: SettingsPage, name: 'SettingsPage', segment: 'settings' },
+            { component: MessagesPage, name: 'MessagesPage', segment: 'messages' } 
       ]
     }),
     IonicStorageModule.forRoot()
@@ -48,7 +53,8 @@ import { AuthService } from '../providers/authService';
     LoginPage,
     MyhubPage,
     SettingsPage,
-    DisclaimerPage
+    DisclaimerPage,
+    MessagesPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

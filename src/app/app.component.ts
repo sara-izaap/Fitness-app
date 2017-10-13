@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/settings/settings';
 import { MyhubPage } from '../pages/myhub/myhub';
+import { MessagesPage } from '../pages/messages/messages';
 
 export interface PageInterface {
   title: string;
@@ -26,12 +27,12 @@ export interface PageInterface {
 })
 export class ConferenceApp {
  
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav; 
 
   appPages: PageInterface[] = [
     { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },
     { title: 'My Hub', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
-    { title: 'Messages', name: 'MessagePage', component: '', icon: 'md-chatboxes' },
+    { title: 'Messages', name: 'MessagesPage', component: MessagesPage, icon: 'md-chatboxes' },
     { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
     { title: 'Nutrition', name: 'NutritionPage', component: '', icon: 'md-restaurant' },
     { title: 'Shopping List', name: 'ShoppingPage', component: '', icon: 'ios-cart' },
@@ -93,6 +94,7 @@ export class ConferenceApp {
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);
     } else {
+      console.log('page', page);
       this.nav.setRoot(page.name, params).catch((err: any) => {
         console.log(`Didn't set nav root: ${err}`);
       });
