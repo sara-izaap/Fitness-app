@@ -30,7 +30,7 @@ export class MessagesPage {
         public globalVar:GlobalVars) {
 
        this.chaters = [
-                       {id:"2", name:"GenoMaxx Fitness", avatar:"https://uinames.com/api/photos/female/30.jpg"}
+                       {id:"2", name:"GenoMaxx Fitness", avatar:"assets/img/cover__disclaimer.jpg"}
                       ];
 
     }
