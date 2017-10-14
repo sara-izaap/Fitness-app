@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import {  IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ChatPage } from '../chat/chat';
+import { AddchatPage } from '../addchat/addchat';
+
+import { UserService } from '../../providers/userService';
+import { GlobalVars } from '../../providers/globalVars';
 
 /**
  * Generated class for the MessagesPage page.
@@ -19,11 +23,16 @@ export class MessagesPage {
 
     chaters:any = [];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams,
+        public uservice: UserService,
+        public globalVar:GlobalVars) {
+
        this.chaters = [
-                       {id:"140000198202211138", name:"GenoMaxx Fitness", avatar:"img/logo.png"},
-                       {id:"140000198202211138", name:"Raja", avatar:"img/avatar-cher.png"}
+                       {id:"2", name:"GenoMaxx Fitness", avatar:"https://uinames.com/api/photos/female/30.jpg"}
                       ];
+
     }
 
   ionViewDidLoad() {
@@ -39,7 +48,7 @@ export class MessagesPage {
   addNew()
   {
   	console.log('JJJ');
-    this.navCtrl.push(ChatPage, {id:"140000198202211138", name:'Ram'});
+    this.navCtrl.push(AddchatPage, {id:"140000198202211138", name:'Ram'});
   }
 
 }

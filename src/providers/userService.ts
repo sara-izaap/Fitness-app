@@ -51,5 +51,25 @@ export class UserService {
 
     }
 
+    addChat(formdata:any){
+        console.log('UUUUUUUUUUUUUUUUUUUUUUUUUU');
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(apiUrl + 'user/add_chat', formdata, options).map(res => res.json())
+            .toPromise();
+
+    }
+
+    get_chats(id:number){
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(apiUrl + 'user/get_chat?id='+id ,options)
+            .map(res => res.json())
+            .toPromise();
+
+    }
+
 
 }

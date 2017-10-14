@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Events, Content, TextInput } from 'ionic-angular';
+
+import { UserService } from '../../providers/userService';
+import { GlobalVars } from '../../providers/globalVars';
 /**
  * Generated class for the ChatPage page.
  *
@@ -24,70 +27,72 @@ export class ChatPage {
 	editorMsg:any = '';
 	showEmojiPicker:boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
-  	console.log(navParams.get('name'));
-  	this.toUser = {
-            id: navParams.get('id'),
-            name: navParams.get('name')
-        };
-    this.user = {id:"210000198410281948", name:"Krish"};
+  	constructor(
+  		public navCtrl: NavController, 
+  		public navParams: NavParams, 
+  		public events: Events,
+  		public uservice: UserService,
+  		public globalVar:GlobalVars) {
+	  	console.log(navParams.get('name'));
+	  	
+	  	this.toUser = {
+	            id: navParams.get('id'),
+	            name: navParams.get('name')
+	        };
 
-    this.msgList = [
-					    {
-					      "messageId":"1",
-					      "userId":"140000198202211138",
-					      "userName":"Luff",
-					      "userImgUrl":"./assets/user.jpg",
-					      "toUserId":"210000198410281948",
-					      "toUserName":"Hancock",
-					      "userAvatar":"./assets/to-user.jpg",
-					      "time":1488349800000,
-					      "message":"A good programmer is someone who always looks both ways before crossing a one-way street. ",
-					      "status":"success"
+	    this.user = {};
 
-					    },
-					    {
-					      "messageId":"2",
-					      "userId":"210000198410281948",
-					      "userName":"Hancock",
-					      "userImgUrl":"./assets/to-user.jpg",
-					      "toUserId":"140000198202211138",
-					      "toUserName":"Luff",
-					      "userAvatar":"./assets/user.jpg",
-					      "time":1491034800000,
-					      "message":"Don’t worry if it doesn't work right. If everything did, you’d be out of a job.",
-					      "status":"success"
-					    },
-					    {
-					      "messageId":"3",
-					      "userId":"140000198202211138",
-					      "userName":"Luff",
-					      "userImgUrl":"./assets/user.jpg",
-					      "toUserId":"210000198410281948",
-					      "toUserName":"Hancock",
-					      "userAvatar":"./assets/to-user.jpg",
-					      "time":1491034920000,
-					      "message":"Most of you are familiar with the virtues of a programmer. There are three, of course: laziness, impatience, and hubris.",
-					      "status":"success"
-					    },
-					    {
-					      "messageId":"4",
-					      "userId":"210000198410281948",
-					      "userName":"Hancock",
-					      "userImgUrl":"./assets/to-user.jpg",
-					      "toUserId":"140000198202211138",
-					      "toUserName":"Luff",
-					      "userAvatar":"./assets/user.jpg",
-					      "time":1491036720000,
-					      "message":"One man’s crappy software is another man’s full time job.",
-					      "status":"success"
-					    }
-					  ];
-  }
+	    this.globalVar.getUserdata().then((data) => {
+      		data = JSON.parse(data);
+      		console.log(data);
+      		this.user.id = data.id;
+      		this.user.name = data.first_name+' '+data.last_name;
+      		this.getChats();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
-  }
+    	});
+
+	}
+
+	getChats()
+	{
+		this.uservice.get_chats(this.toUser.id).then(res =>{
+	            //this.noteslist = res.data;
+	            console.log(res.data);
+	        
+	        let data:any = res.data;
+
+	        this.msgList = [];
+
+	        for(let row in data )
+	        {
+	        	let temp:any = {
+	        					"userId":data[row].from_id,
+	        					"userName":data[row].from_name,
+	        					"userImgUrl":"./assets/user.jpg",
+	        					"toUserId":data[row].to_id,
+						      	"toUserName":data[row].to_name,
+						      	"userAvatar":"./assets/to-user.jpg",
+						      	"time":data[row].created_time,
+						      	"message": data[row].message,
+						      	"status": "success"
+	        					};
+	        	console.log(row, temp);
+	        	this.msgList.push(temp);
+	        }
+
+	        setTimeout(()=>{
+        		this.scrollToBottom();
+        	}, 500);
+
+	      })
+	      .catch(error => console.log(error));
+	}
+
+  	ionViewDidLoad() {
+  	  console.log('ionViewDidLoad ChatPage');
+  	}
+
+
 
   	onFocus() 
   	{
@@ -99,43 +104,29 @@ export class ChatPage {
     sendMsg() {
         if (!this.editorMsg.trim()) return;
 
-        // Mock message
-        const id = Date.now().toString();
         let newMsg:any = {
-            messageId: Date.now().toString(),
-            userId: this.user.id,
-            userName: this.user.name,
-            userAvatar: this.user.avatar,
-            toUserId: this.toUser.id,
-            time: Date.now(),
-            message: this.editorMsg,
-            status: 'pending'
+        	from_id: this.user.id,
+        	to_id: this.toUser.id,
+        	message: this.editorMsg,
+        	time: Date.now()/1000
         };
 
-        console.log(id, newMsg);
+        this.uservice.addChat(newMsg)
+        .then((result) => {
 
-        setTimeout(()=>{
-        	console.log('(((((((((((((()))))))))))))))');
-        	let index = this.getMsgIndexById(id);
-            if (index !== -1) {
-                this.msgList[index].status = 'success';
-            }
-        }, 3000)
+        	console.log(result);
+        	this.getChats();
+            
+        })
 
-        this.pushNewMsg(newMsg);
+        
+
+        //this.pushNewMsg(newMsg);
         this.editorMsg = '';
 
         if (!this.showEmojiPicker) {
             this.messageInput.setFocus();
         }
-
-        // this.chatService.sendMsg(newMsg)
-        // .then(() => {
-        //     let index = this.getMsgIndexById(id);
-        //     if (index !== -1) {
-        //         this.msgList[index].status = 'success';
-        //     }
-        // })
     }
 
     pushNewMsg(msg:any) 
