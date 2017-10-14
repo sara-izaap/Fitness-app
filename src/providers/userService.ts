@@ -52,7 +52,6 @@ export class UserService {
     }
 
     addChat(formdata:any){
-        console.log('UUUUUUUUUUUUUUUUUUUUUUUUUU');
         let headers = new Headers();
         let options = new RequestOptions({ headers: headers });
 

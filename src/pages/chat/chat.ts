@@ -44,7 +44,6 @@ export class ChatPage {
 
 	    this.globalVar.getUserdata().then((data) => {
       		data = JSON.parse(data);
-      		console.log(data);
       		this.user.id = data.id;
       		this.user.name = data.first_name+' '+data.last_name;
       		this.getChats();
@@ -56,8 +55,7 @@ export class ChatPage {
 	getChats()
 	{
 		this.uservice.get_chats(this.toUser.id).then(res =>{
-	            //this.noteslist = res.data;
-	            console.log(res.data);
+	       //this.noteslist = res.data;
 	        
 	        let data:any = res.data;
 
@@ -76,7 +74,6 @@ export class ChatPage {
 						      	"message": data[row].message,
 						      	"status": "success"
 	        					};
-	        	console.log(row, temp);
 	        	this.msgList.push(temp);
 	        }
 
@@ -87,12 +84,6 @@ export class ChatPage {
 	      })
 	      .catch(error => console.log(error));
 	}
-
-  	ionViewDidLoad() {
-  	  console.log('ionViewDidLoad ChatPage');
-  	}
-
-
 
   	onFocus() 
   	{

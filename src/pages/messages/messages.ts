@@ -41,13 +41,11 @@ export class MessagesPage {
 
   goList( chater:any )
   {
-    console.log('IIIIIIIII');
     this.navCtrl.push(ChatPage, chater);
   }
 
   addNew()
   {
-  	console.log('JJJ');
     this.navCtrl.push(AddchatPage, {id:"140000198202211138", name:'Ram'});
   }
 
