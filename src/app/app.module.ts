@@ -75,4 +75,4 @@ import { NoteService } from '../providers/noteService';
     SplashScreen
   ]
 })
-export class AppModule { }
+export class AppModule { } 

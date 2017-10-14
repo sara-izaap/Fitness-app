@@ -153,7 +153,7 @@ export class ChatPage {
 
     getMsgIndexById(id: string) 
     {
-        return this.msgList.findIndex(e => e.messageId === id)
+        return this.msgList.findIndex((e:any) => e.messageId === id)
     }
 
   	scrollToBottom() 
