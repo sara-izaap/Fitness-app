@@ -1,0 +1,30 @@
+<ion-header>
+<ion-toolbar>
+  <ion-title>Add Note</ion-title>
+  <ion-buttons end>
+        <button  (click)="dismiss(false)"><ion-icon name="md-close-circle" ion-icon-large></ion-icon></button >
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+	<form #noteForm="ngForm" novalidate>
+		<ion-list>
+			<ion-item notearea>
+	        	<ion-textarea [(ngModel)]="formdata.notes" name="notes" #notes="ngModel" required></ion-textarea>
+	        </ion-item>
+	        <p ion-text [hidden]="notes.valid || submitted == false" color="danger" padding-left>
+	            Notes is required
+	        </p> 
+
+	        <ion-row responsive-sm> 
+	        	<ion-col notesave>
+	            <button ion-button btn-center (click)="saveNote(noteForm)" type="submit" data__gradient--blue>Save</button>
+	            </ion-col>
+	        </ion-row>           
+
+		</ion-list>
+	</form>
+
+</ion-content>

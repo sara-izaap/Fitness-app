@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/settings/settings';
 import { MyhubPage } from '../pages/myhub/myhub';
 import { MessagesPage } from '../pages/messages/messages';
+import { NotesPage } from '../pages/notes/notes';
 
 export interface PageInterface {
   title: string;
@@ -39,7 +40,7 @@ export class ConferenceApp {
     { title: 'Measurements', name: 'MeasurementPage', component: '', icon: 'ios-barcode' },
     { title: 'Progress Photos', name: 'ProgressPage', component: '', icon: 'md-images' },
     { title: 'Calender', name: 'CalenderPage', component: '', icon: 'md-calendar' },
-    { title: 'Notes', name: 'NotesPage', component: '', icon: 'ios-copy' },
+    { title: 'Notes', name: 'NotesPage', component: NotesPage, icon: 'ios-copy' },
     { title: 'Settings', name: 'SettingsPage', component: SettingsPage, icon: 'md-settings' }
   ];
 
@@ -94,7 +95,6 @@ export class ConferenceApp {
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);
     } else {
-      console.log('page', page);
       this.nav.setRoot(page.name, params).catch((err: any) => {
         console.log(`Didn't set nav root: ${err}`);
       });

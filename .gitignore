@@ -24,6 +24,9 @@ temp/
 hooks/
 platforms/
 plugins/
+www/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
+.sourcemaps/main.css.map
+.sourcemaps/main.js.map

@@ -16,12 +16,13 @@ import { SettingsPage } from '../pages/settings/settings';
 import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
 import { MyhubPage } from '../pages/myhub/myhub';
 import { MessagesPage } from '../pages/messages/messages';
+import { NotesPage,ModalAddItemPage } from '../pages/notes/notes';
+
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
 import { AuthService } from '../providers/authService'; 
- 
-
+import { NoteService } from '../providers/noteService';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { AuthService } from '../providers/authService';
     MyhubPage,
     SettingsPage,
     DisclaimerPage,
-    MessagesPage
+    MessagesPage,
+    NotesPage,
+    ModalAddItemPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { AuthService } from '../providers/authService';
             { component: DisclaimerPage, name: 'Disclaimer', segment: 'disclaimer' },
             { component: MyhubPage, name: 'MyhubPage', segment: 'myhub' },
             { component: SettingsPage, name: 'SettingsPage', segment: 'settings' },
-            { component: MessagesPage, name: 'MessagesPage', segment: 'messages' } 
+            { component: MessagesPage, name: 'MessagesPage', segment: 'messages' },
+            { component: NotesPage, name: 'NotesPage', segment: 'notes' } 
       ]
     }),
     IonicStorageModule.forRoot()
@@ -54,13 +58,16 @@ import { AuthService } from '../providers/authService';
     MyhubPage,
     SettingsPage,
     DisclaimerPage,
-    MessagesPage
+    MessagesPage,
+    NotesPage,
+    ModalAddItemPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     GlobalVars,
     UserService,
     AuthService,
+    NoteService,
     InAppBrowser,
     SplashScreen
   ]
