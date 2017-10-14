@@ -17,12 +17,12 @@
 
 
 <ion-content padding>
-	<ion-list>
-	  <ion-item>
+	<ion-list >
+	  <ion-item *ngFor="let chater of chaters" (click)="goList(chater)">
 	    <ion-avatar item-start>
-	      <img src="img/avatar-cher.png">
+	      <img src="{{chater.avatar}}">
 	    </ion-avatar>
-	    <h2>GenoMax Fitness</h2>
+	    <h2>{{chater.name}}</h2>
 	  </ion-item>
 	</ion-list>
 
@@ -30,21 +30,3 @@
 		<button ion-fab mini (click)="addNew()" ><ion-icon name="add"></ion-icon></button>
 	</ion-fab>
 </ion-content>
-
-<ion-footer class="chatPageFooter">
-  <ion-toolbar>
-
-    <ion-item>
-      <ion-label style="margin:0px;"></ion-label>
-      <div item-content style="width:100%;">
-        
-      </div>
-    </ion-item>
-
-    <ion-buttons right>
-      <button style="min-width:45px;" (click)="sendMessage()">
-        <ion-icon name="send"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

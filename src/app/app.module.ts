@@ -17,6 +17,7 @@ import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
 import { MyhubPage } from '../pages/myhub/myhub';
 import { MessagesPage } from '../pages/messages/messages';
 import { NotesPage,ModalAddItemPage } from '../pages/notes/notes';
+import { ChatPage } from '../pages/chat/chat';
 
 
 import {GlobalVars} from "../providers/globalVars";
@@ -34,7 +35,8 @@ import { NoteService } from '../providers/noteService';
     DisclaimerPage,
     MessagesPage,
     NotesPage,
-    ModalAddItemPage
+    ModalAddItemPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { NoteService } from '../providers/noteService';
     DisclaimerPage,
     MessagesPage,
     NotesPage,
-    ModalAddItemPage
+    ModalAddItemPage,
+    ChatPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
