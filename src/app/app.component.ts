@@ -9,6 +9,8 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/settings/settings';
 import { MyhubPage } from '../pages/myhub/myhub';
+import { MessagesPage } from '../pages/messages/messages';
+import { NotesPage } from '../pages/notes/notes';
 
 export interface PageInterface {
   title: string;
@@ -26,19 +28,19 @@ export interface PageInterface {
 })
 export class ConferenceApp {
  
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav; 
 
   appPages: PageInterface[] = [
     { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },
     { title: 'My Hub', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
-    { title: 'Messages', name: 'MessagePage', component: '', icon: 'md-chatboxes' },
+    { title: 'Messages', name: 'MessagesPage', component: MessagesPage, icon: 'md-chatboxes' },
     { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
     { title: 'Nutrition', name: 'NutritionPage', component: '', icon: 'md-restaurant' },
     { title: 'Shopping List', name: 'ShoppingPage', component: '', icon: 'ios-cart' },
     { title: 'Measurements', name: 'MeasurementPage', component: '', icon: 'ios-barcode' },
     { title: 'Progress Photos', name: 'ProgressPage', component: '', icon: 'md-images' },
     { title: 'Calender', name: 'CalenderPage', component: '', icon: 'md-calendar' },
-    { title: 'Notes', name: 'NotesPage', component: '', icon: 'ios-copy' },
+    { title: 'Notes', name: 'NotesPage', component: NotesPage, icon: 'ios-copy' },
     { title: 'Settings', name: 'SettingsPage', component: SettingsPage, icon: 'md-settings' }
   ];
 

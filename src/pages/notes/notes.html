@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notes</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-list>
+      <ion-card *ngFor="let notes of noteslist">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="https://uinames.com/api/photos/female/30.jpg">
+          </ion-avatar>
+          <h2>{{notes.name}}</h2>
+          <p>{{notes.created_date}}</p>
+        </ion-item>
+        <ion-card-content>
+          <p>{{notes.notes}}</p>
+        </ion-card-content>
+      </ion-card>
+
+  </ion-list>
+  
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="Addnote()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>
