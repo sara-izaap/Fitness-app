@@ -13,6 +13,7 @@ export class NotesPage {
  
   user_id:any;
   noteslist:any;
+  gmtplus:any;
 
   constructor(
     public navCtrl: NavController,
@@ -28,6 +29,8 @@ export class NotesPage {
       this.getNotesList();
 
     });
+
+    this.gmtplus =  5*24*60*60;
 
   }
 

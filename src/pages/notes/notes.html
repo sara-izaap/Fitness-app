@@ -15,7 +15,7 @@
             <img src="https://uinames.com/api/photos/female/30.jpg">
           </ion-avatar>
           <h2>{{notes.name}}</h2>
-          <p>{{notes.created_date}}</p>
+          <p>{{notes.created_date - gmtplus | timeAgo}}</p>
         </ion-item>
         <ion-card-content>
           <p>{{notes.notes}}</p>

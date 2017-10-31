@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add Food / Drink</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >	
+	<ion-segment [(ngModel)]="segment" fab fab-fixed>
+	    <ion-segment-button value="recent" >
+	      RECENT
+	    </ion-segment-button>
+	    <ion-segment-button value="frequent">
+	      FREQUENT
+	    </ion-segment-button>
+	     <ion-segment-button value="myfood">
+	      MY FOODS
+	    </ion-segment-button>
+  	</ion-segment>
+    
+    <ion-item-group *ngIf="segment === 'recent'">
+    	<ion-item-divider light>
+            <h2>Recent Items</h2>
+        </ion-item-divider>
+
+      	<ion-item *ngFor="let food of recent">
+      		<h2>{{food.food_name}}</h2>
+      	</ion-item>
+    </ion-item-group>  
+
+    <ion-list *ngIf="segment === 'frequent'">
+    	<ion-item-divider light>
+            <h2>Frequent Items</h2>
+        </ion-item-divider>
+
+      	<ion-item *ngFor="let food of frequent">
+      		<h2>{{food.food_name}}</h2>
+      	</ion-item>
+    </ion-list> 
+
+    <ion-list *ngIf="segment === 'myfood'">
+    	<ion-item-divider light>
+            <h2>My Food Items</h2>
+        </ion-item-divider>
+      	<ion-item *ngFor="let food of myfood">
+      		<h2>{{food.food_name}}</h2>
+      	</ion-item>
+    </ion-list>   	
+	
+	<ion-fab right bottom #fab>
+        <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+          <button ion-fab (click)="Addfood(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     
+        </ion-fab-list>
+    </ion-fab>
+
+</ion-content>

@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Events, MenuController, Nav, Platform,App } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
+
+import { Events, MenuController, Nav, Platform,App,ToastController } from 'ionic-angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -11,6 +13,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { MyhubPage } from '../pages/myhub/myhub';
 import { MessagesPage } from '../pages/messages/messages';
 import { NotesPage } from '../pages/notes/notes';
+import { NutritionPage } from '../pages/nutrition/nutrition';
 
 export interface PageInterface {
   title: string;
@@ -31,11 +34,11 @@ export class ConferenceApp {
   @ViewChild(Nav) nav: Nav; 
 
   appPages: PageInterface[] = [
-    { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },
-    { title: 'My Hub', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
+    { title: 'Dashboard', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
+    { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },    
     { title: 'Messages', name: 'MessagesPage', component: MessagesPage, icon: 'md-chatboxes' },
     { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
-    { title: 'Nutrition', name: 'NutritionPage', component: '', icon: 'md-restaurant' },
+    { title: 'Nutrition', name: 'NutritionPage', component: NutritionPage, icon: 'md-restaurant' },
     { title: 'Shopping List', name: 'ShoppingPage', component: '', icon: 'ios-cart' },
     { title: 'Measurements', name: 'MeasurementPage', component: '', icon: 'ios-barcode' },
     { title: 'Progress Photos', name: 'ProgressPage', component: '', icon: 'md-images' },
@@ -53,10 +56,17 @@ export class ConferenceApp {
     public platform: Platform,
     public storage: Storage,
     public splashScreen: SplashScreen,
-    public app: App
+    public app: App,
+    private network: Network,
+    private toastCtrl: ToastController
   ) {
 
     this.app.viewWillEnter.subscribe(() => { 
+
+     this.network.onConnect().subscribe(()=>{ console.log("connected");});
+
+      if(this.network.type == 'none' )
+        this.connectivity_check();
 
       this.storage.get('userData').then((data) => {
         if(data){
@@ -127,6 +137,14 @@ export class ConferenceApp {
   enableMenu(loggedIn: boolean) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
+  }
+
+  connectivity_check(){
+    const toast = this.toastCtrl.create({
+      message: 'No internet connectionm available',
+      duration: 4000
+    });
+    toast.present();
   }
 
   isActive(page: PageInterface) {

@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title (click)="openCalendar()">{{date | date:'dd MMMM yyyy'}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+  <div *ngIf="segment === 'plan'">  
+
+    <p>Which plan would you like to log against today?</p>
+    <ion-list radio-group [(ngModel)]="value">
+        <ion-card *ngFor="let plans of defaultplans">
+          <ion-item>
+              <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
+              <ion-label>{{plans.name}}</ion-label>
+              <ion-radio name="plan_name" value="{{plans.id}}"></ion-radio>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-item>
+              <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
+              <ion-label>No Nutrition Plan</ion-label>
+              <ion-radio name="plan_name" value="ownplan"></ion-radio> 
+          </ion-item>
+          <ion-card-content>
+            <p>Log your own nutrition. Don't follow a set Nutrition plans.</p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-row responsive-sm *ngIf="value">
+          <ion-col>
+            <button ion-button (click)="nutritionLogplan(value)" block>Next</button>
+          </ion-col>
+        </ion-row>
+
+    </ion-list>
+  </div>
+
+
+
+  <div *ngIf="segment === 'data'" >
+
+      <ion-list>
+          <ion-item>
+            <ion-label>Select Meal Plan</ion-label>
+            <ion-select [(ngModel)]="nutritionplans" (ionChange)="planoverwrite($event)">          
+              <ion-option *ngFor="let plans of defaultplans" value="{{plans.id}}">{{plans.name}}</ion-option>        
+            </ion-select>
+          </ion-item>
+
+          <ion-row  responsive-sm *ngIf="mealPlans==''">
+            <ion-col>
+              <p>No meals have been logged for this day yet.</p>
+            </ion-col>
+          </ion-row>
+      </ion-list>
+      
+      <ion-item-group *ngFor="let meal of mealPlans">
+        <ion-item-divider light>
+            <h2>{{meal}}</h2>
+            <ion-note item-end>{{calculate(meal)}} cal</ion-note>
+        </ion-item-divider>
+
+        <ion-item  *ngFor="let food of planData[meal]">
+            <h2>{{food.food_name}} - {{food.serving_size*food.serve_unit}} {{food.short_name}}</h2>
+            <ion-note item-end *ngInit="food.serving_size*food.calories; let cal">{{cal}}</ion-note>
+        </ion-item> 
+
+        <ion-item (click)="AddFood(meal)">
+          <p>+ Add Food / Drink</p>
+        </ion-item>
+
+      </ion-item-group>  
+      
+      <ion-list>
+        <ion-row responsive-sm>
+            <ion-col>
+              <button ion-button (click)="ViewMacro()" block>View Macros</button>
+            </ion-col>
+        </ion-row>
+        <ion-row responsive-sm>
+            <ion-col>
+              <button ion-button (click)="SaveLogplan()" block>Save Nutrition Log</button>
+            </ion-col>
+        </ion-row>
+      </ion-list>  
+
+      <ion-fab right bottom #fab>
+        <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+          <button ion-fab (click)="Addmeal(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     
+        </ion-fab-list>
+      </ion-fab>
+
+  </div>
+
+</ion-content>

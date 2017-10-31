@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Nutrition Plans</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+      <ion-card *ngFor="let plans of defaultplans">
+        <ion-item>
+            <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
+            <h2>{{plans.name}}</h2>
+        </ion-item>
+      </ion-card>
+
+  </ion-list>
+  
+  <ion-fab right bottom #fab>
+    <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+
+    <ion-fab-list side="top">
+      <button ion-fab (click)="Addplan(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

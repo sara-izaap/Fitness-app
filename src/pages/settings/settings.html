@@ -105,17 +105,23 @@
 
     <ion-list-header>Emails</ion-list-header>
 
-     <ion-item *ngFor="let track of emailtracks" [attr.track]="track.attribute">
-      <ion-label>{{track.name}}</ion-label>
-      <ion-toggle [(ngModel)]="track.isChecked" color="primary"></ion-toggle>
+    <div *ngFor="let track of emailtracks">
 
-      <!--
-      <ion-select [(ngModel)]="track.attribute" (ionChange)="track.delivery=track.attribute">
-        <ion-option *ngFor="let slot of delivery_slots"  value="slot.id" >{{slot.name}}</ion-option>      
-      </ion-select>
-      -->
+        <ion-item  [attr.track]="track.attribute" delivery-slot>
+          <ion-label>{{track.name}}</ion-label>
+          <ion-toggle [(ngModel)]="track.isChecked" color="primary"></ion-toggle>
 
-    </ion-item>
+        </ion-item>
+
+        <ion-item delivery-slot>
+          <ion-label>&nbsp;</ion-label>
+          <ion-select [(ngModel)]="track.attribute" (ionChange)="track.delivery=track.attribute" interface="popover">
+              <ion-option *ngFor="let slot of delivery_slots"  [value]="slot.id" 
+              [selected]="slot.id==track.delivery">{{slot.name}}</ion-option>      
+          </ion-select>
+        </ion-item>
+
+    </div>
 
     <ion-row responsive-sm>
         <ion-col>
