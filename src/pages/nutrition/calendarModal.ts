@@ -8,11 +8,7 @@ export class CalendarModalPage {
  
   date:any;
   optionsBasic: CalendarComponentOptions = {
-      canBackwardsSelected: true,
       color: 'cal-color',
-      doneIcon: false,
-      closeIcon: false,
-      autoDone: true,
       showMonthPicker:true,
       defaultDate: new Date()
     };

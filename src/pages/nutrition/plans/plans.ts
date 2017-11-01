@@ -33,6 +33,7 @@ export class PlansPage {
   segment:string = "plan";
   value:any="";
   nutritionplans:any="";
+  getData:any;
   
   constructor(
     public navCtrl: NavController,
@@ -143,7 +144,7 @@ export class PlansPage {
     }  
   }
 
-  calculate(meal){
+  calculate(meal:any){
 
     let counter:number = 0;
     for(let row of this.planData[meal]) {
@@ -162,8 +163,7 @@ export class PlansPage {
       inputs: [
         {
           name: 'meal_name',
-          placeholder: 'Meal Name',
-          attr: { maxlength: 20 }
+          placeholder: 'Meal Name'
         }
       ],
       buttons: [
