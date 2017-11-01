@@ -1,5 +1,5 @@
 import { Component,Directive, Input, ViewContainerRef, TemplateRef } from '@angular/core';
-import {NavController, ModalController, AlertController,FabContainer } from 'ionic-angular';
+import {NavController, ModalController, AlertController,FabContainer,NavParams } from 'ionic-angular';
 import * as moment from 'moment'
 import { GlobalVars } from '../../../providers/globalVars';
 import { NutritionService } from '../../../providers/nutritionService';
@@ -39,10 +39,12 @@ export class PlansPage {
     private globalVar:GlobalVars,
     public nuservice:NutritionService,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public params:NavParams
   ) 
   { 
-    console.log(this.date); 
+    this.date = this.params.data;
+    console.log(this.date);
   }
 
   ngOnInit() {
@@ -51,7 +53,8 @@ export class PlansPage {
       data = JSON.parse(data);
       this.user_id = data.id;
 
-      this.DefaultplanList();
+      this.DefaultplanList(); 
+      this.checkdata(this.date);     
 
     });
 
@@ -166,7 +169,7 @@ export class PlansPage {
       buttons: [
         {
           text: 'Cancel',role: 'cancel',
-          handler: data => {
+          handler: () => {
             console.log('Cancel clicked');
           }
         },
@@ -193,9 +196,20 @@ export class PlansPage {
 
   AddFood(meal:any){
 
-    let data = {meal:meal,user_id:this.user_id};
-    this.navCtrl.push(FoodlistPage,data);
-  }
+    this.getData = (data) =>
+    {
+      return new Promise((resolve, reject) => {
+          console.log(data);
+        resolve();
+      });
+    };
 
-  
+    let data = {meal:meal,user_id:this.user_id};
+
+    this.navCtrl.push(FoodlistPage,{
+      data:data,
+      callback: this.getData
+    });
+
+  }
 }

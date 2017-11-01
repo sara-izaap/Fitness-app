@@ -26,6 +26,8 @@ import { NutritionPage } from '../pages/nutrition/nutrition';
 import { PlansPage,NgInitDirective } from '../pages/nutrition/plans/plans';
 import{ CalendarModalPage } from '../pages/nutrition/calendarModal';
 import { FoodlistPage } from '../pages/nutrition/food/foodList';
+import {FoodviewPage} from '../pages/nutrition/foodview/foodview';
+
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
@@ -50,7 +52,8 @@ import { NutritionService } from '../providers/nutritionService';
     PlansPage,
     NgInitDirective,
     CalendarModalPage,
-    FoodlistPage
+    FoodlistPage,
+    FoodviewPage
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,8 @@ import { NutritionService } from '../providers/nutritionService';
     NutritionPage,
     PlansPage,
     CalendarModalPage,
-    FoodlistPage
+    FoodlistPage,
+    FoodviewPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

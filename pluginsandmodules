@@ -5,5 +5,4 @@ npm install time-ago-pipe --save
 ionic cordova plugin add cordova-plugin-network-information
 npm install --save @ionic-native/network
 
-ionic cordova plugin add cordova-plugin-calendar
-npm install --save @ionic-native/calendar
+npm install ion2-calendar moment --save

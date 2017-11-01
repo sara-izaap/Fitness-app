@@ -1,0 +1,122 @@
+<ion-header>
+<ion-toolbar>
+  <ion-buttons>
+        <button (click)="dismiss()" picgallery><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+  </ion-buttons>
+  <ion-buttons end>
+        <button (click)="AddfoodtoPlan()"><ion-icon name="md-checkmark" ion-icon-large> </ion-icon></button >
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+  <ion-item-group>
+    <ion-item-divider light>
+      <h2>{{food.food_name}}</h2>
+    </ion-item-divider>
+
+    <ion-item light>
+      <ion-label>Serving Size</ion-label>
+      <ion-select [(ngModel)]="foodobject" (ionChange)="foodunitchange($event)">          
+        <ion-option *ngFor="let unit of foodunits" [value]="unit">{{unit.serve_unit}} {{unit.short_name}}</ion-option>       
+      </ion-select>
+    </ion-item>
+
+    <ion-item light>
+      <ion-label stacked>Number of servings</ion-label>
+      <ion-input [(ngModel)]="num_servings" name='numservings'></ion-input>
+    </ion-item>
+
+    <ion-item-divider light> 
+      <ion-label stacked>&nbsp;</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <h2>Calories</h2>
+     <ion-note item-end>{{seldata.calories}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Fat(g)</h2>
+     <ion-note item-end>{{seldata.total_fat}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Saturated(g)</h2>
+     <ion-note item-end>{{seldata.saturated_fat}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Monounsaturated(g)</h2>
+     <ion-note item-end>{{seldata.mono_unsaturated}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Cholestrol(mg)</h2>
+     <ion-note item-end>{{seldata.cholestrol}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Sodium(mg)</h2>
+     <ion-note item-end>{{seldata.sodium}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Potassium(mg)</h2>
+     <ion-note item-end>{{seldata.potassium}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Carbohydrates(g)</h2>
+     <ion-note item-end>{{seldata.total_carbohydrates}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Fibre(g)</h2>
+     <ion-note item-end>{{seldata.dietary_fiber}} </ion-note>
+    </ion-item>
+
+     <ion-item>
+      <h2>Sugars(g)</h2>
+     <ion-note item-end>{{seldata.sugars}} </ion-note>
+    </ion-item>
+    
+     <ion-item>
+      <h2>Protein(g)</h2>
+     <ion-note item-end>{{seldata.protien}} </ion-note>
+    </ion-item>
+
+    <ion-item-divider light> 
+      <ion-label stacked>&nbsp;</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <h2>Vitamin A(%)</h2>
+     <ion-note item-end>{{seldata.vitamin_a}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Vitamin C(%)</h2>
+     <ion-note item-end>{{seldata.vitamin_c}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Calcium(%)</h2>
+     <ion-note item-end>{{seldata.calcium}} </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Iron(%)</h2>
+     <ion-note item-end>{{seldata.iron}} </ion-note>
+    </ion-item>
+
+    <ion-row responsive-sm>
+      <ion-col>
+        <button ion-button (click)="AddfoodtoPlan()" block>ADD FOOD / DRINK ITEM</button>
+      </ion-col>
+    </ion-row>
+
+  </ion-item-group>  
+
+</ion-content>

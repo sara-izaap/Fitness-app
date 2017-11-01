@@ -1,13 +1,13 @@
 import { Component} from '@angular/core';
-import {NavController,NavParams} from 'ionic-angular';
-
+import {NavController,NavParams,ModalController} from 'ionic-angular';
 import { NutritionService } from '../../../providers/nutritionService';
+import {FoodviewPage} from '../foodview/foodview';
 
 @Component({ selector:'page-foodlist',templateUrl:'foodList.html'})
 export class FoodlistPage {
  
   segment='recent';
-  userdata:any;
+  userdata:any={};
   recent:any;
   frequent:any
   myfoods:any;
@@ -15,11 +15,13 @@ export class FoodlistPage {
   constructor(
     public navCtrl: NavController,
     public params:NavParams,
+    public modalCtrl: ModalController,
     public nuservice:NutritionService
   ) 
   { 
+    this.callback  = this.params.get('callback');
     this.userdata = this.params.data;
-    console.log(this.userdata);
+    
   }
   
   ngOnInit(){
@@ -35,6 +37,22 @@ export class FoodlistPage {
         this.myfood = res.myfood;
     })
     .catch(error => console.log(error));
+  }
+
+  viewFood(fooditem:any){
+
+    let foodView =  this.modalCtrl.create(FoodviewPage, { food: fooditem  });
+
+    foodView.present();
+
+    foodView.onDidDismiss(data => {
+
+      if(data){
+        data['meal_name'] =  this.userdata.meal;
+        this.callback(data).then(()=>{ this.navCtrl.pop() });
+      }
+    })
+
   } 
 
   

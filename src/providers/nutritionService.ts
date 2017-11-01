@@ -41,4 +41,12 @@ export class NutritionService {
         return this.http.get(apiUrl + 'nutrition/foodlist?user_id='+id, options).map(res => res.json()).toPromise();
     }
 
+    getFoodUnits(food_id:number){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(apiUrl + 'nutrition/foodunits?food_id='+food_id, options).map(res => res.json()).toPromise();
+    }
+
 }

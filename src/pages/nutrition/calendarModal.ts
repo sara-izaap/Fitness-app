@@ -7,7 +7,7 @@ import {CalendarComponentOptions} from 'ion2-calendar'
 export class CalendarModalPage {
  
   date:any;
-  optionsBasic: CalendarComponentOptions = { pickMode:'single',
+  optionsBasic: CalendarComponentOptions = {
       canBackwardsSelected: true,
       color: 'cal-color',
       doneIcon: false,
