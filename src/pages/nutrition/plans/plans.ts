@@ -146,7 +146,7 @@ export class PlansPage {
 
   calculate(meal:any){
 
-    let counter:number = 0;
+    let counter:any = '0';
     for(let row of this.planData[meal]) {
        counter = parseInt(counter) + parseInt(row['calories']);
     }
@@ -196,9 +196,9 @@ export class PlansPage {
 
   AddFood(meal:any){
 
-    this.getData = (data) =>
+    this.getData = (data:any) =>
     {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
           console.log(data);
         resolve();
       });

@@ -10,7 +10,8 @@ export class FoodlistPage {
   userdata:any={};
   recent:any;
   frequent:any
-  myfoods:any;
+  myfood:any;
+  callback:any;
   
   constructor(
     public navCtrl: NavController,

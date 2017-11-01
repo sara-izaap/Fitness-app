@@ -7,19 +7,14 @@ import {CalendarComponentOptions} from 'ion2-calendar'
 export class CalendarModalPage {
  
   date:any;
-  optionsBasic: CalendarComponentOptions = {
-      color: 'cal-color',
-      showMonthPicker:true,
-      defaultDate: new Date()
-    };
+  optionsBasic: CalendarComponentOptions = { };
 
   constructor(public viewCtrl: ViewController,public params:NavParams) {
 
     this.date = params.get('date');
-    this.optionsBasic.defaultDate = this.date;
   }
 
-  onChange($event){
+  ondateChange($event:any){
     console.log($event);
     this.viewCtrl.dismiss($event);   
   }
