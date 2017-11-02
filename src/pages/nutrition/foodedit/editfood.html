@@ -1,10 +1,10 @@
 <ion-header>
 <ion-toolbar>
   <ion-buttons>
-        <button (click)="dismiss()" picgallery><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+        <button (click)="delete()" picgallery><ion-icon name="md-trash" ion-icon-large> </ion-icon></button >
   </ion-buttons>
   <ion-buttons end>
-        <button (click)="AddfoodtoPlan()"><ion-icon name="md-checkmark" ion-icon-large> </ion-icon></button >
+        <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
   </ion-buttons>
 </ion-toolbar>
 </ion-header>
@@ -19,7 +19,7 @@
     <ion-item light>
       <ion-label>Serving Size</ion-label>
       <ion-select [(ngModel)]="foodobject" (ionChange)="foodunitchange($event)">          
-        <ion-option *ngFor="let unit of foodunits" [value]="unit">{{unit.serve_unit}} {{unit.short_name}}</ion-option>       
+        <ion-option *ngFor="let unit of foodunits" [value]="unit.food_unit_id">{{unit.serve_unit}} {{unit.short_name}}</ion-option>       
       </ion-select>
     </ion-item>
 
@@ -27,10 +27,12 @@
       <ion-label stacked>Number of servings</ion-label>
       <ion-input [(ngModel)]="num_servings" name='numservings'></ion-input>
     </ion-item>
-
-    <ion-item-divider light> 
-      <ion-label stacked>&nbsp;</ion-label>
-    </ion-item-divider>
+    
+    <ion-row responsive-sm>
+      <ion-col>
+        <button ion-button (click)="EditfoodtoPlan()" block>SAVE FOOD / DRINK ITEM</button>
+      </ion-col>
+    </ion-row>
 
     <ion-item>
       <h2>Calories</h2>
@@ -110,12 +112,6 @@
       <h2>Iron(%)</h2>
      <ion-note item-end>{{num_servings*seldata.iron}} </ion-note>
     </ion-item>
-
-    <ion-row responsive-sm>
-      <ion-col>
-        <button ion-button (click)="AddfoodtoPlan()" block>ADD FOOD / DRINK ITEM</button>
-      </ion-col>
-    </ion-row>
 
   </ion-item-group>  
 

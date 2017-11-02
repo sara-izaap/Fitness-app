@@ -5,6 +5,7 @@ import { GlobalVars } from '../../../providers/globalVars';
 import { NutritionService } from '../../../providers/nutritionService';
 import{ CalendarModalPage } from '../calendarModal';
 import { FoodlistPage } from '../food/foodList';
+import {EditfoodPage} from '../foodedit/editfood';
 
 @Directive({
   selector: '[ngInit]',
@@ -148,7 +149,7 @@ export class PlansPage {
 
     let counter:any = '0';
     for(let row of this.planData[meal]) {
-       counter = parseInt(counter) + parseInt(row['calories']);
+       counter = parseInt(counter) + parseInt(row['serving_size'] * row['calories']);
     }
     return counter;
 
@@ -199,6 +200,7 @@ export class PlansPage {
     this.getData = (data:any) =>
     {
       return new Promise((resolve) => {
+          this.planData[meal].push(data);
           console.log(data);
         resolve();
       });
@@ -212,4 +214,29 @@ export class PlansPage {
     });
 
   }
+
+  EditFood(fooditem:any,pos:any){
+
+    let foodEdit =  this.modalCtrl.create(EditfoodPage, { food: fooditem  });
+
+    foodEdit.present();
+
+    foodEdit.onDidDismiss(retdata => {
+    
+      if(retdata){
+        
+          if(retdata.type){            
+              this.planData[fooditem.meal_name][pos] = retdata.data;
+          }
+          else
+          {
+            const index:number = this.planData[fooditem.meal_name].indexOf(pos);
+            if (index === -1) 
+                this.planData[fooditem.meal_name].splice(index, 1);
+            
+          }
+      }
+    })
+  }
+
 }

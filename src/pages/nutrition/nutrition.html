@@ -5,6 +5,7 @@
     </button>
     <ion-title>My Nutrition Plans</ion-title>
     </ion-navbar>
+    <ion-searchbar  [(ngModel)]="searchKey" (ionInput)="onInput($event)" placeholder="Search Plans" ></ion-searchbar>
 </ion-header>
 
 <ion-content >
