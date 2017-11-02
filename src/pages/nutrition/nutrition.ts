@@ -13,7 +13,9 @@ export class NutritionPage {
  
   user_id:any;
   defaultplans:any;
+  responsedata:Array<any>;
   loading:any;
+  searchKey:string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -41,10 +43,27 @@ export class NutritionPage {
   DefaultplanList(){
 
       this.nuservice.getPlans(this.user_id).then(res =>{
-            this.defaultplans = res.data;
+          this.defaultplans = res.data;
+          this.responsedata = res.data;
+
       })
       .catch(error => console.log(error));
 
+  }
+
+  onInput(event) {
+
+    if(this.searchKey)
+        this.defaultplans = this.findByName(this.searchKey); 
+    else   
+        this.defaultplans = this.responsedata; 
+
+  }
+
+  findByName(key:string) {
+     return this.responsedata.filter((item) => {
+        return item.name.toLowerCase().indexOf(key.toLowerCase()) > -1;           
+    }); 
   }
 
   Addplan(fab:FabContainer){
