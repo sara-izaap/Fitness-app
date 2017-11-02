@@ -11,12 +11,20 @@
 
   <div *ngIf="segment === 'plan'">  
 
-    <p>Which plan would you like to log against today?</p>
-    <ion-list radio-group [(ngModel)]="value">
+    
+
+  <ion-card no-shadow>
+    <ion-card-content>
+      <p>Which plan would you like to log against today?</p>
+    </ion-card-content>
+  </ion-card>
+
+    <ion-list radio-group [(ngModel)]="value" no-ellipse>
         <ion-card *ngFor="let plans of defaultplans">
           <ion-item>
               <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
               <ion-label>{{plans.name}}</ion-label>
+              <!-- <ion-card-title> {{plans.name}} </ion-card-title> -->
               <ion-radio name="plan_name" value="{{plans.id}}"></ion-radio>
           </ion-item>
         </ion-card>

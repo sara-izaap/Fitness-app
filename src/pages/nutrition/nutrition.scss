@@ -53,3 +53,50 @@ page-speaker-list {
 }
 
 page-calendar{margin-top:60px;}
+
+[fab--bottom] {
+  padding-bottom: 50px;
+}
+
+.bg-transparent {
+      background: rgba(0, 0, 0, 0.33);
+}
+
+.days-btn.today {
+  background:#488aff;
+
+  p {
+    color:#fff !important;
+  }
+}
+
+ion-calendar .title {
+ background:#488aff; 
+}
+
+ion-calendar .title * {
+  color:#fff !important
+}
+
+[no-shadow] {
+  box-shadow: 0 0 0 transparent;
+}
+
+[no-ellipse],
+[no-ellipse] *{
+   white-space: inherit;
+  overflow: inherit;
+  text-overflow: inherit;
+}
+
+ion-item-divider * {
+ font-weight:bold !important 
+}
+
+.input-wrapper {
+  padding-left: 15px;
+}
+
+ion-item-divider {
+ padding-left:0 !important 
+}
