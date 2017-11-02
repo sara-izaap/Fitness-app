@@ -55,9 +55,32 @@ page-speaker-list {
 page-calendar{margin-top:60px;}
 
 [fab--bottom] {
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
+ion-searchbar { border:1px solid rgba(3, 3, 3, 0.1) !important; background:#fff !important;}
+
+page-nutrition,page-plans{
+  [item-start]{
+     margin:0 5px 0 0  !important;
+  }
+
+  .planwrap .input-wrapper {
+      padding-left: 15px;
+  }
+  
+} 
+
+[inwrapper] .input-wrapper {
+    padding-left: 15px;
+}
+
+[gradient-button-gray]{background-color:rgba(14, 1, 1, 0.37); color:#fff;}
+
+[fabbottom] {
+    position: fixed !important;
+    right: 23px !important;
+}
 .bg-transparent {
       background: rgba(0, 0, 0, 0.33);
 }
@@ -70,6 +93,9 @@ page-calendar{margin-top:60px;}
   }
 }
 
+ion-calendar{
+  padding:0 !important;
+}
 ion-calendar .title {
  background:#488aff; 
 }
@@ -93,10 +119,8 @@ ion-item-divider * {
  font-weight:bold !important 
 }
 
-.input-wrapper {
-  padding-left: 15px;
-}
-
 ion-item-divider {
  padding-left:0 !important 
 }
+
+[addfood--drink]{ color: map-get($colors, primary) !important;}

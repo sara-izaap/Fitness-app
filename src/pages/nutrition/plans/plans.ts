@@ -6,6 +6,7 @@ import { NutritionService } from '../../../providers/nutritionService';
 import{ CalendarModalPage } from '../calendarModal';
 import { FoodlistPage } from '../food/foodList';
 import {EditfoodPage} from '../foodedit/editfood';
+import {ViewmacroPage} from '../macro/macro';
 
 @Directive({
   selector: '[ngInit]',
@@ -222,7 +223,7 @@ export class PlansPage {
     foodEdit.present();
 
     foodEdit.onDidDismiss(retdata => {
-    
+
       if(retdata){
         
           if(retdata.type){            
@@ -237,6 +238,24 @@ export class PlansPage {
           }
       }
     })
+  }
+
+  ViewMacro(){
+
+    let viewMacro =  this.modalCtrl.create(ViewmacroPage, { plandata: this.planData  });
+
+    viewMacro.present();
+
+  }
+
+  SaveNutritionLog(){
+
+      let savedata:any = {meal:this.planData,plandata:this.planData,user_id:this.user_id,date:moment(this.date).format('YYYY-MM-DD')};
+
+      this.nuservice.SaveNutritionLog(savedata).then(res =>{
+          console.log(res);
+      })
+      .catch(error => console.log(error));
   }
 
 }

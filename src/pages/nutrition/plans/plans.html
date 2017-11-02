@@ -3,15 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title (click)="openCalendar()">{{date | date:'dd MMMM yyyy'}}</ion-title>
+    <ion-title (click)="openCalendar()">{{date | date:'dd MMM yyyy'}}</ion-title>
     </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
 
   <div *ngIf="segment === 'plan'">  
-
-    
 
   <ion-card no-shadow>
     <ion-card-content>
@@ -24,7 +22,6 @@
           <ion-item>
               <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
               <ion-label>{{plans.name}}</ion-label>
-              <!-- <ion-card-title> {{plans.name}} </ion-card-title> -->
               <ion-radio name="plan_name" value="{{plans.id}}"></ion-radio>
           </ion-item>
         </ion-card>
@@ -67,7 +64,7 @@
           </ion-row>
       </ion-list>
       
-      <ion-item-group *ngFor="let meal of mealPlans">
+      <ion-item-group *ngFor="let meal of mealPlans" class="planwrap">
         <ion-item-divider light>
             <h2>{{meal}}</h2>
             <ion-note item-end>{{calculate(meal)}} cal</ion-note>
@@ -79,25 +76,25 @@
         </ion-item> 
 
         <ion-item (click)="AddFood(meal)">
-          <p>+ Add Food / Drink</p>
+          <p addfood--drink>+ Add Food / Drink</p>
         </ion-item>
 
       </ion-item-group>  
       
-      <ion-list>
+      <ion-list fab--bottom>
         <ion-row responsive-sm>
             <ion-col>
-              <button ion-button (click)="ViewMacro()" block>View Macros</button>
+              <button ion-button (click)="ViewMacro()" block gradient-button-gray>View Macros</button>
             </ion-col>
         </ion-row>
         <ion-row responsive-sm>
             <ion-col>
-              <button ion-button (click)="SaveLogplan()" block>Save Nutrition Log</button>
+              <button ion-button (click)="SaveNutritionLog()" block>Save Nutrition Log</button>
             </ion-col>
         </ion-row>
       </ion-list>  
 
-      <ion-fab right bottom #fab>
+      <ion-fab right bottom #fab fabbottom>
         <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
         <ion-fab-list side="top">
           <button ion-fab (click)="Addmeal(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     

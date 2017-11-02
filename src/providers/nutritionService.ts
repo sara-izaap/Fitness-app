@@ -49,4 +49,14 @@ export class NutritionService {
         return this.http.get(apiUrl + 'nutrition/foodunits?food_id='+food_id, options).map(res => res.json()).toPromise();
     }
 
+    SaveNutritionLog(plandata:any){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(apiUrl + 'nutrition/savenutrition', plandata, options).map(res => res.json())
+            .toPromise();
+
+    }
+
 }

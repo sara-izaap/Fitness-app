@@ -28,6 +28,7 @@ import{ CalendarModalPage } from '../pages/nutrition/calendarModal';
 import { FoodlistPage } from '../pages/nutrition/food/foodList';
 import {FoodviewPage} from '../pages/nutrition/foodview/foodview';
 import {EditfoodPage} from '../pages/nutrition/foodedit/editfood';
+import {ViewmacroPage} from '../pages/nutrition/macro/macro';
 
 
 import {GlobalVars} from "../providers/globalVars";
@@ -55,7 +56,8 @@ import { NutritionService } from '../providers/nutritionService';
     CalendarModalPage,
     FoodlistPage,
     FoodviewPage,
-    EditfoodPage
+    EditfoodPage,
+    ViewmacroPage
   ],
   imports: [
     BrowserModule,
@@ -91,7 +93,8 @@ import { NutritionService } from '../providers/nutritionService';
     CalendarModalPage,
     FoodlistPage,
     FoodviewPage,
-    EditfoodPage
+    EditfoodPage,
+    ViewmacroPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

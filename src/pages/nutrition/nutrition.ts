@@ -51,7 +51,7 @@ export class NutritionPage {
 
   }
 
-  onInput(event:any) {
+  onInput() {
 
     if(this.searchKey)
         this.defaultplans = this.findByName(this.searchKey); 

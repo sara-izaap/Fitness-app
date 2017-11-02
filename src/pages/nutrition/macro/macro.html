@@ -1,0 +1,78 @@
+<ion-header>
+<ion-toolbar>
+    <ion-title>Macros</ion-title>
+  <ion-buttons end>
+        <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+  <ion-item-group>
+    <ion-item-divider light>
+        <ion-note item-end>Target</ion-note>
+        <ion-note item-end>toatl</ion-note>
+        <ion-note item-end>Left</ion-note>
+    </ion-item-divider>
+
+    <ion-item>
+      <h2>Calories</h2>
+      <ion-note item-end>{{targetdata.calories}}</ion-note>
+      <ion-note item-end >{{macrodata.calories}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.calories - macrodata.calories) > 0"> {{targetdata.calories-macrodata.calories}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.calories - macrodata.calories) < 0" red> 0{{cal}}</ion-note>
+
+    </ion-item>
+
+    <ion-item>
+      <h2>Protein(g)</h2>
+      <ion-note item-end>{{targetdata.protein}}</ion-note>
+      <ion-note item-end>{{macrodata.protein}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.protein - macrodata.protein) > 0"> {{targetdata.protein-macrodata.protein}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.protein - macrodata.protein) < 0" red> 0</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Carbohydrate(g)</h2>
+      <ion-note item-end>{{targetdata.carbohydrate}}</ion-note>
+      <ion-note item-end>{{macrodata.carbohydrate}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.carbohydrate - macrodata.carbohydrate) > 0"> {{targetdata.carbohydrate-macrodata.carbohydrate}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.carbohydrate - macrodata.carbohydrate) < 0" red> 0</ion-note>
+    </ion-item>
+
+    <ion-item inwrapper>
+      <h2>Fibre(g)</h2>
+      <ion-note item-end>{{targetdata.fibre}}</ion-note>
+      <ion-note item-end>{{macrodata.fibre}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.fibre - macrodata.fibre) > 0"> {{targetdata.fibre-macrodata.fibre}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.fibre - macrodata.fibre) < 0" red> 0</ion-note>
+    </ion-item>
+
+    <ion-item inwrapper>
+      <h2>Sugars(g)</h2>
+      <ion-note item-end>{{targetdata.sugars}}</ion-note>
+      <ion-note item-end>{{macrodata.sugars}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.sugars - macrodata.sugars) > 0"> {{targetdata.sugars-macrodata.sugars}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.sugars - macrodata.sugars) < 0" red> 0</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Fat(g)</h2>
+      <ion-note item-end>{{targetdata.fat}}</ion-note>
+      <ion-note item-end>{{macrodata.fat}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.fat - macrodata.fat) > 0"> {{targetdata.fat-macrodata.fat}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.fat - macrodata.fat) < 0" red> 0</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <h2>Sodium(g)</h2>
+      <ion-note item-end>{{targetdata.sodium}}</ion-note>
+      <ion-note item-end>{{macrodata.sodium}}</ion-note>
+      <ion-note green item-end *ngIf="(targetdata.sodium - macrodata.sodium) > 0"> {{targetdata.sodium-macrodata.sodium}}</ion-note>
+      <ion-note item-end *ngIf="(targetdata.sodium - macrodata.sodium) < 0" red> 0</ion-note>
+    </ion-item>
+
+  </ion-item-group>  
+
+</ion-content>
