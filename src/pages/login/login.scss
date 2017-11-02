@@ -60,10 +60,14 @@ page-user {
 
 [data-user] {
   background: url(../assets/img/login__user.png) no-repeat left center;
+  background-size: 24px;
+  padding-left: 25px !important;
 }
 
 [data-pass] {
   background:url(../assets/img/login__password.png) no-repeat left center;
+  background-size: 24px;
+  padding-left: 25px !important;
 }
 
 [data__gradient--blue] {
@@ -91,10 +95,10 @@ page-user {
   &:before,
   &:after {
     content: "";
-    border: 1px solid #fff;
+    border-bottom: 1px solid #fff;
     position: absolute;
     display: inline-block;
-    width: 35%;
+    width: 43%;
     top: 50%;
   }
 
@@ -110,3 +114,6 @@ page-user {
 // 1b75bb
 
 
+.item-block:first-child {
+    border-top: 0.55px solid transparent !important;
+}

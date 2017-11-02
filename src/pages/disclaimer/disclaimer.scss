@@ -12,6 +12,11 @@
     left:0;
     top:0;
   }
+
+  p {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 .slide-title {
@@ -60,9 +65,16 @@ page-tutorial {
 }
 
 [data__button--ok] {
-  background-color:#fff;
-  max-width: 85px;
+  max-width: 80%;
   margin: 0 auto;
-  color:#000;
+  color:#fff;
   font-weight:bold;
+  background: #00adee; 
+  background: -webkit-linear-gradient(to bottom, #00adee, #197ac0); 
+  background: linear-gradient(to bottom, #00adee, #197ac0);
+}
+
+.anchor {
+  color:#00adee;
+  margin: 0 5px;
 }
