@@ -23,17 +23,12 @@
         </ion-item> -->
 
         <p align__center>
-              <!-- <ion-item>
-                <ion-label> Sam</ion-label>
-                <ion-toggle disabled checked="false"></ion-toggle>
-              </ion-item> -->
-
-                <input type="checkbox" name="vehicle" value="Car" checked>
+              <ion-checkbox [(ngModel)]="privacy_terms"></ion-checkbox>
 
               I agree to the <a href="javascript:void(0);" class="anchor">Terms Of Services</a>and the <a href="javascript:void(0)" class="anchor">Privacy Policy</a>
         </p>
 
-      <button ion-button icon-end block clear data__button--ok (click)="startApp()"> OK </button>
+      <button (disabled)="privacy_terms" ion-button icon-end block clear data__button--ok (click)="startApp()"> OK </button>
     </ion-slide>
 
   </ion-slides>
