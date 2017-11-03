@@ -36,7 +36,7 @@ export class ConferenceApp {
   @ViewChild(Nav) nav: Nav; 
 
   appPages: PageInterface[] = [
-    { title: 'Dashboard', name: 'Dashboard', component: MyhubPage, icon: 'md-home' },
+    { title: 'Dashboard', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
     { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },    
     { title: 'Messages', name: 'MessagesPage', component: MessagesPage, icon: 'md-chatboxes' },
     { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
