@@ -268,7 +268,7 @@ export class PlansPage {
       this.nuservice.SaveNutritionLog(savedata).then(res =>{
           console.log(res);
           loading.dismiss();
-          this.navCtrl.push(MyhubPage);
+          this.nav.setRoot(MyhubPage);
       })
       .catch(error => console.log(error));
   }
