@@ -5,7 +5,7 @@ import {NavParams, ViewController} from 'ionic-angular';
 export class ViewmacroPage {
   
   plandata:any;
-  macrodata:any={calories:0,protein:0,carbohydrate:0,fibre:0,sugars:0,fat:0,sodium:0};
+  macrodata:any={calories:'0',protein:'0',carbohydrate:'0',fibre:'0',sugars:'0',fat:'0',sodium:'0'};
   targetdata:any={calories:1000,protein:100,carbohydrate:270,fibre:50,sugars:60,fat:60,sodium:70};
 
   constructor(public viewCtrl: ViewController,public params:NavParams) {
