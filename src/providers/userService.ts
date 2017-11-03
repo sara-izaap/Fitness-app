@@ -70,5 +70,22 @@ export class UserService {
 
     }
 
+    getFoodslist(user_id:number){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(apiUrl + 'user/shoppingfood?user_id='+user_id ,options).map(res => res.json()).toPromise();
+    }
+
+    saveShoplist(data:any){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(apiUrl + 'user/saveshop_items', data, options).map(res => res.json())
+            .toPromise();
+    }
+
 
 }

@@ -16,7 +16,7 @@
   </ion-refresher>
 
   <ion-list>
-      <ion-card *ngFor="let plans of defaultplans">
+      <ion-card *ngFor="let plans of defaultplans" (click)="Viewplan(plans)">
         <ion-item>
             <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
             <h2>{{plans.name}}</h2>
@@ -29,6 +29,7 @@
     <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
 
     <ion-fab-list side="top">
+      <span class="tooltip-label">Log Nutrition</span>
       <button ion-fab (click)="Addplan(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     
     </ion-fab-list>
   </ion-fab>

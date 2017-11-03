@@ -11,7 +11,6 @@ export class ViewmacroPage {
   constructor(public viewCtrl: ViewController,public params:NavParams) {
 
     this.plandata = this.params.get('plandata');
-    console.log(this.plandata );
   }
 
   ngOnInit() {
@@ -19,13 +18,13 @@ export class ViewmacroPage {
     for(let row in this.plandata){
 
       for(let item of this.plandata[row]){
-        this.macrodata.calories = parseInt(this.macrodata.calories) + parseInt(item['serving_size'] * item['calories']);
-        this.macrodata.protein = parseInt(this.macrodata.protein) + parseInt(item['serving_size'] * item['protien']);
-        this.macrodata.carbohydrate = parseInt(this.macrodata.carbohydrate) + parseInt(item['serving_size'] * item['total_carbohydrates']);
-        this.macrodata.fibre = parseInt(this.macrodata.fibre) + parseInt(item['serving_size'] * item['dietary_fiber']);
-        this.macrodata.sugars = parseInt(this.macrodata.sugars) + parseInt(item['serving_size'] * item['sugars']);
-        this.macrodata.fat = parseInt(this.macrodata.fat) + parseInt(item['serving_size'] * item['total_fat']);
-        this.macrodata.sodium = parseInt(this.macrodata.sodium) + parseInt(item['serving_size'] * item['sodium']);
+        this.macrodata.calories = parseInt(this.macrodata.calories) + parseInt(item['serving_size'])*parseInt(item['calories']);
+        this.macrodata.protein = parseInt(this.macrodata.protein) + parseInt(item['serving_size'])*parseInt(item['protien']);
+        this.macrodata.carbohydrate = parseInt(this.macrodata.carbohydrate) + parseInt(item['serving_size'])*parseInt(item['total_carbohydrates']);
+        this.macrodata.fibre = parseInt(this.macrodata.fibre) + parseInt(item['serving_size'])*parseInt(item['dietary_fiber']);
+        this.macrodata.sugars = parseInt(this.macrodata.sugars) + parseInt(item['serving_size'])*parseInt( item['sugars']);
+        this.macrodata.fat = parseInt(this.macrodata.fat) + parseInt(item['serving_size'])*parseInt( item['total_fat']);
+        this.macrodata.sodium = parseInt(this.macrodata.sodium) + parseInt(item['serving_size'])*parseInt( item['sodium']);
       }
     }
 

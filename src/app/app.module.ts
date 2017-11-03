@@ -23,13 +23,14 @@ import { NotesPage,ModalAddItemPage } from '../pages/notes/notes';
 import { ChatPage } from '../pages/chat/chat';
 import { AddchatPage } from '../pages/addchat/addchat';
 import { NutritionPage } from '../pages/nutrition/nutrition';
+import { LognutplanPage } from '../pages/nutrition/lognutplan/lognutplan';
 import { PlansPage,NgInitDirective } from '../pages/nutrition/plans/plans';
 import{ CalendarModalPage } from '../pages/nutrition/calendarModal';
 import { FoodlistPage } from '../pages/nutrition/food/foodList';
 import {FoodviewPage} from '../pages/nutrition/foodview/foodview';
 import {EditfoodPage} from '../pages/nutrition/foodedit/editfood';
 import {ViewmacroPage} from '../pages/nutrition/macro/macro';
-
+import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
@@ -51,13 +52,15 @@ import { NutritionService } from '../providers/nutritionService';
     ChatPage,
     AddchatPage,
     NutritionPage,
+    LognutplanPage,
     PlansPage,
     NgInitDirective,
     CalendarModalPage,
     FoodlistPage,
     FoodviewPage,
     EditfoodPage,
-    ViewmacroPage
+    ViewmacroPage,
+    ShoppingListPage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { NutritionService } from '../providers/nutritionService';
             { component: SettingsPage, name: 'SettingsPage', segment: 'settings' },
             { component: MessagesPage, name: 'MessagesPage', segment: 'messages' },
             { component: NotesPage, name: 'NotesPage', segment: 'notes' },
-            { component: NutritionPage, name: 'NutritionPage', segment: 'Nutrition' } 
+            { component: NutritionPage, name: 'NutritionPage', segment: 'Nutrition' },
+            { component: ShoppingListPage, name: 'ShoppingListPage', segment: 'ShoppingList' } 
       ]
     }),
     IonicStorageModule.forRoot(),
@@ -89,12 +93,14 @@ import { NutritionService } from '../providers/nutritionService';
     ChatPage,
     AddchatPage,
     NutritionPage,
+    LognutplanPage,
     PlansPage,
     CalendarModalPage,
     FoodlistPage,
     FoodviewPage,
     EditfoodPage,
-    ViewmacroPage
+    ViewmacroPage,
+    ShoppingListPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

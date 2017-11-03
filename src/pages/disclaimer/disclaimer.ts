@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { MenuController, NavController, Slides } from 'ionic-angular';
+import { InAppBrowser} from '@ionic-native/in-app-browser';
 
 import { MyhubPage } from '../myhub/myhub';
 
@@ -11,16 +11,22 @@ import { MyhubPage } from '../myhub/myhub';
 
 export class DisclaimerPage {
   showSkip = true;
+  checkterms:boolean = false;
+  showerror:boolean = false;
 
 	@ViewChild('slides') slides: Slides;
 
   constructor(
     public navCtrl: NavController,
-    public menu: MenuController
+    public menu: MenuController,
+    private inappbrowser: InAppBrowser
   ) { }
 
   startApp() {
-    this.navCtrl.setRoot(MyhubPage);
+    if(this.checkterms)
+      this.navCtrl.setRoot(MyhubPage);
+    else
+        this.showerror = true;
   }
 
   onSlideChangeStart(slider: Slides) {
@@ -30,6 +36,10 @@ export class DisclaimerPage {
 	ionViewWillEnter() {
 		this.slides.update();
 	}
+
+  openWithBrowser(url:string){
+    this.inappbrowser.create(url,"_blank");
+  } 
 
   ionViewDidEnter() {
     // the root left menu should be disabled on the tutorial page

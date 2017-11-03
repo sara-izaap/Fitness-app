@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Shopping List</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+  
+  <ion-card no-shadow>
+    <ion-card-content>
+      <p>Please note: quantities shown are daily amounts.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item-group>
+
+    <ion-item *ngFor="let food of responsedata" text-wrap>
+      <ion-label>{{food.food_name}}</ion-label>
+      <p item-end>{{food.serving_size}} {{food.short_name}}</p>
+      <ion-checkbox [(ngModel)]="food.checked"></ion-checkbox>
+    </ion-item>
+
+  </ion-item-group>
+
+</ion-content>

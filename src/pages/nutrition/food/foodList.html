@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content >	
+
 	<ion-segment [(ngModel)]="segment" fab fab-fixed>
 	    <ion-segment-button value="recent" >
 	      RECENT
@@ -52,7 +53,8 @@
 	<ion-fab right bottom #fab>
         <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
         <ion-fab-list side="top">
-          <button ion-fab (click)="Addfood(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     
+          <span class="tooltip-label">Create Food</span>
+          <button ion-fab ><ion-icon name="md-restaurant"></ion-icon></button>     
         </ion-fab-list>
     </ion-fab>
 

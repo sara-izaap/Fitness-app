@@ -1,34 +1,23 @@
-<!--
-<ion-header no-border>
-  <ion-navbar>
-    <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">Skip</button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
---> 
 
 <ion-content no-bounce cover__disclaimer>
   <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" >
 
     <ion-slide>
-      <!-- <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/> -->
         <h2 class="slide-title">DISCLAIMER</h2>
       
         <p align__center>GenoMaxx Fitness includes interactive workouts designed to improve overall health &amp; wellness. Some of these workouts are highly intense. Your health is very important to us. Please consult your physician before starting your tailored exercise program.</p>
 
-    <!--     <ion-item>
-          <ion-label>Rust</ion-label>
-          <ion-radio value="rust"></ion-radio>
-        </ion-item> -->
-
         <p align__center>
-              <ion-checkbox [(ngModel)]="privacy_terms"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="checkterms"></ion-checkbox>
 
-              I agree to the <a href="javascript:void(0);" class="anchor">Terms Of Services</a>and the <a href="javascript:void(0)" class="anchor">Privacy Policy</a>
+              I agree to the <a href="javascript:void(0);" (click)="openWithBrowser('https://www.genomaxxfitness.com/terms-and-conditions/')" class="anchor">Terms Of Services</a>and the <a href="javascript:void(0)" (click)="openWithBrowser('https://www.genomaxxfitness.com/privacy-policy/')" class="anchor">Privacy Policy</a>
         </p>
 
-      <button (disabled)="privacy_terms" ion-button icon-end block clear data__button--ok (click)="startApp()"> OK </button>
+        <p ion-text *ngIf="showerror" color="danger" padding-left>
+        Please check terms and conditions
+      </p>
+
+      <button  ion-button icon-end block clear data__button--ok (click)="startApp()"> OK </button>
     </ion-slide>
 
   </ion-slides>

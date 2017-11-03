@@ -5,6 +5,7 @@ import { Network } from '@ionic-native/network';
 import { Events, MenuController, Nav, Platform,App,ToastController } from 'ionic-angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { Storage } from '@ionic/storage';
 
@@ -14,6 +15,7 @@ import { MyhubPage } from '../pages/myhub/myhub';
 import { MessagesPage } from '../pages/messages/messages';
 import { NotesPage } from '../pages/notes/notes';
 import { NutritionPage } from '../pages/nutrition/nutrition';
+import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
 
 export interface PageInterface {
   title: string;
@@ -34,12 +36,12 @@ export class ConferenceApp {
   @ViewChild(Nav) nav: Nav; 
 
   appPages: PageInterface[] = [
-    { title: 'Dashboard', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
+    { title: 'Dashboard', name: 'Dashboard', component: MyhubPage, icon: 'md-home' },
     { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },    
     { title: 'Messages', name: 'MessagesPage', component: MessagesPage, icon: 'md-chatboxes' },
     { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
     { title: 'Nutrition', name: 'NutritionPage', component: NutritionPage, icon: 'md-restaurant' },
-    { title: 'Shopping List', name: 'ShoppingPage', component: '', icon: 'ios-cart' },
+    { title: 'Shopping List', name: 'ShoppingListPage', component:ShoppingListPage, icon: 'ios-cart' },
     { title: 'Measurements', name: 'MeasurementPage', component: '', icon: 'ios-barcode' },
     { title: 'Progress Photos', name: 'ProgressPage', component: '', icon: 'md-images' },
     { title: 'Calender', name: 'CalenderPage', component: '', icon: 'md-calendar' },
@@ -58,7 +60,8 @@ export class ConferenceApp {
     public splashScreen: SplashScreen,
     public app: App,
     private network: Network,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private inappbrowser: InAppBrowser
   ) {
 
     this.app.viewWillEnter.subscribe(() => { 
@@ -110,6 +113,10 @@ export class ConferenceApp {
       });
     }
 
+  }
+
+  shopurl(){
+     this.inappbrowser.create("https://www.genomaxxfitness.com/shop","_blank");
   }
 
   logOut() {

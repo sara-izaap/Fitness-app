@@ -25,6 +25,10 @@
           <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
           {{p.title}}
         </button>
+        <button ion-item menuClose  (click)="shopurl()">
+          <ion-icon item-start name="ios-cart-outline" ></ion-icon>
+          Shop
+        </button>
         <button ion-item menuClose  (click)="logOut()">
           <ion-icon item-start name="log-out" ></ion-icon>
           Logout

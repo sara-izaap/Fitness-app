@@ -64,18 +64,18 @@ page-nutrition,page-plans{
   [item-start]{
      margin:0 5px 0 0  !important;
   }
-
-  .planwrap .input-wrapper {
-      padding-left: 15px;
-  }
   
 } 
+
+.planwrap .input-wrapper {
+    padding-left: 15px;
+}
 
 [inwrapper] .input-wrapper {
     padding-left: 15px;
 }
 
-[gradient-button-gray]{background-color:rgba(14, 1, 1, 0.37); color:#fff;}
+[gradient-button-gray]{background-color:rgba(14, 1, 1, 0.88); color:#fff;}
 
 [fabbottom] {
     position: fixed !important;
@@ -119,8 +119,35 @@ ion-item-divider * {
  font-weight:bold !important 
 }
 
-ion-item-divider {
+.planwrap ion-item-divider {
  padding-left:0 !important 
 }
 
 [addfood--drink]{ color: map-get($colors, primary) !important;}
+
+[macro-align] .item:first-child .item-inner {
+    margin-right: 7px;
+}
+[macro-align] .note {
+    text-align: center !important;
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 50px;
+    font-size: .9em;
+}
+ion-buttons button{background:none}
+
+.tooltip-label{
+  background: #2d2c2c;
+  color: white;
+  padding: 5px;
+  position: absolute;
+  top: 16px;
+  right: 55px;
+  border-radius: 4px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.macro-green{ color:#12ec33;}
+.macro-red{ color:#ec3112;}

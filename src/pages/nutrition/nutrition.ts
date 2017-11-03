@@ -5,7 +5,7 @@ import {NavController, LoadingController,ToastController,Refresher,FabContainer}
 import { GlobalVars } from '../../providers/globalVars';
 import { NutritionService } from '../../providers/nutritionService';
 import { PlansPage } from './plans/plans';
-
+import { LognutplanPage } from './lognutplan/lognutplan';
 
 @Component({ selector:'page-nutrition',templateUrl:'nutrition.html'})
 
@@ -28,8 +28,6 @@ export class NutritionPage {
 
   ngOnInit() {
 
-    this.loading = this.loader.create();
-
     this.globalVar.getUserdata().then((data) => {
       data = JSON.parse(data);
       this.user_id = data.id;
@@ -42,9 +40,13 @@ export class NutritionPage {
 
   DefaultplanList(){
 
+    this.loading = this.loader.create();
+    this.loading.present();
+
       this.nuservice.getPlans(this.user_id).then(res =>{
           this.defaultplans = res.data;
           this.responsedata = res.data;
+          this.loading.dismiss();
 
       })
       .catch(error => console.log(error));
@@ -70,6 +72,10 @@ export class NutritionPage {
     fab.close();
     let date = new Date();
     this.navCtrl.push(PlansPage,date);
+  }
+
+  Viewplan(plan:any){
+    this.navCtrl.push(LognutplanPage,plan);
   }
 
   doRefresh(refresher: Refresher) {

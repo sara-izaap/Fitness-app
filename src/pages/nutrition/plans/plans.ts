@@ -1,5 +1,5 @@
 import { Component,Directive, Input, ViewContainerRef, TemplateRef } from '@angular/core';
-import {NavController, ModalController, AlertController,FabContainer,NavParams } from 'ionic-angular';
+import {NavController, ModalController, AlertController,FabContainer,NavParams,LoadingController } from 'ionic-angular';
 import * as moment from 'moment'
 import { GlobalVars } from '../../../providers/globalVars';
 import { NutritionService } from '../../../providers/nutritionService';
@@ -7,6 +7,7 @@ import{ CalendarModalPage } from '../calendarModal';
 import { FoodlistPage } from '../food/foodList';
 import {EditfoodPage} from '../foodedit/editfood';
 import {ViewmacroPage} from '../macro/macro';
+import { MyhubPage } from '../../myhub/myhub';
 
 @Directive({
   selector: '[ngInit]',
@@ -36,6 +37,7 @@ export class PlansPage {
   value:any="";
   nutritionplans:any="";
   getData:any;
+  plandropdown:any = false;
   
   constructor(
     public navCtrl: NavController,
@@ -43,6 +45,7 @@ export class PlansPage {
     public nuservice:NutritionService,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
+    public loader: LoadingController,
     public params:NavParams
   ) 
   { 
@@ -74,13 +77,13 @@ export class PlansPage {
 
   openCalendar(){
 
-    let myCalendar =  this.modalCtrl.create(CalendarModalPage, { date: this.date  });
+    let myCalendar =  this.modalCtrl.create(CalendarModalPage, { date: this.date});
 
     myCalendar.present();
 
     myCalendar.onDidDismiss(data => {
 
-      if(moment(this.date).format('YYYY-MM-DD') != moment(data).format('YYYY-MM-DD')){
+      if(data && moment(this.date).format('YYYY-MM-DD') != moment(data).format('YYYY-MM-DD')){
         this.date = new Date(data);
         this.checkdata(this.date);
       }          
@@ -91,6 +94,10 @@ export class PlansPage {
 
   checkdata(date:any){
 
+    let loading = this.loader.create();
+
+    loading.present();
+
     date = moment(date).format('YYYY-MM-DD');
     
     this.nuservice.getTodayLog(this.user_id,date).then(res =>{
@@ -98,11 +105,15 @@ export class PlansPage {
         this.planData = res.data;
         this.mealPlans = res.meal;
         this.segment="data";
+        this.plandropdown = false;
+
       }
       else{
         this.segment="plan";
         this.value="";
+        this.plandropdown = true;
       }
+      loading.dismiss();
           
     })
     .catch(error => console.log(error));
@@ -150,7 +161,7 @@ export class PlansPage {
 
     let counter:any = '0';
     for(let row of this.planData[meal]) {
-       counter = parseInt(counter) + parseInt(row['serving_size'] * row['calories']);
+       counter = parseInt(counter) + parseInt(row['serving_size']) * parseInt(row['calories']);
     }
     return counter;
 
@@ -182,7 +193,6 @@ export class PlansPage {
 
               this.mealPlans.push(data.meal_name);
               this.planData[data.meal_name] = [];
-              console.log(this.mealPlans);
 
             } else {
               return false;
@@ -202,7 +212,6 @@ export class PlansPage {
     {
       return new Promise((resolve) => {
           this.planData[meal].push(data);
-          console.log(data);
         resolve();
       });
     };
@@ -250,10 +259,16 @@ export class PlansPage {
 
   SaveNutritionLog(){
 
+      let loading = this.loader.create();
+
+      loading.present();
+
       let savedata:any = {meal:this.planData,plandata:this.planData,user_id:this.user_id,date:moment(this.date).format('YYYY-MM-DD')};
 
       this.nuservice.SaveNutritionLog(savedata).then(res =>{
           console.log(res);
+          loading.dismiss();
+          this.navCtrl.push(MyhubPage);
       })
       .catch(error => console.log(error));
   }
