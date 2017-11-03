@@ -225,24 +225,24 @@ export class PlansPage {
 
   }
 
-  EditFood(fooditem:any,pos:any){
+  EditFood(fooditem:any,pos:any,meal:any){
 
     let foodEdit =  this.modalCtrl.create(EditfoodPage, { food: fooditem  });
 
     foodEdit.present();
 
     foodEdit.onDidDismiss(retdata => {
-
+    
       if(retdata){
-        
+
           if(retdata.type){            
-              this.planData[fooditem.meal_name][pos] = retdata.data;
+              this.planData[meal][pos] = retdata.data;
           }
           else
           {
-            const index:number = this.planData[fooditem.meal_name].indexOf(pos);
+            const index:number = this.planData[meal].indexOf(pos);
             if (index === -1) 
-                this.planData[fooditem.meal_name].splice(index, 1);
+                this.planData[meal].splice(index, 1);
             
           }
       }
