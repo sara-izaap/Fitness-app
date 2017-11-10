@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
-import {NavController,NavParams,ModalController} from 'ionic-angular';
+import {NavController,NavParams,ModalController,FabContainer} from 'ionic-angular';
 import { NutritionService } from '../../../providers/nutritionService';
+import {FoodaddPage} from '../foodadd/foodadd';
 import {FoodviewPage} from '../foodview/foodview';
 
 @Component({ selector:'page-foodlist',templateUrl:'foodList.html'})
@@ -12,6 +13,7 @@ export class FoodlistPage {
   frequent:any
   myfood:any;
   callback:any;
+  getData:any;
   
   constructor(
     public navCtrl: NavController,
@@ -21,7 +23,7 @@ export class FoodlistPage {
   ) 
   { 
     this.callback  = this.params.get('callback');
-    this.userdata = this.params.data;
+    this.userdata = this.params.get('data');
     
   }
   
@@ -53,6 +55,24 @@ export class FoodlistPage {
         this.callback(data).then(()=>{ this.navCtrl.pop() });
       }
     })
+
+  }
+
+  createFood(fab:FabContainer ){
+    fab.close();  
+    this.getData = (data:any) =>
+    {
+      return new Promise((resolve) => {
+          this.viewFood(data);
+          this.getFoodlist();
+        resolve();
+      });
+    };
+
+    this.navCtrl.push(FoodaddPage,{
+      user_id:this.userdata.user_id,
+      callback: this.getData
+    });
 
   } 
 

@@ -11,7 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-import { ConferenceApp } from './app.component';
+import { GenomaxxApp } from './app.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { LoginPage } from '../pages/login/login';
@@ -25,12 +25,14 @@ import { AddchatPage } from '../pages/addchat/addchat';
 import { NutritionPage } from '../pages/nutrition/nutrition';
 import { LognutplanPage } from '../pages/nutrition/lognutplan/lognutplan';
 import { PlansPage,NgInitDirective } from '../pages/nutrition/plans/plans';
-import{ CalendarModalPage } from '../pages/nutrition/calendarModal';
 import { FoodlistPage } from '../pages/nutrition/food/foodList';
+import {FoodaddPage} from '../pages/nutrition/foodadd/foodadd';
 import {FoodviewPage} from '../pages/nutrition/foodview/foodview';
 import {EditfoodPage} from '../pages/nutrition/foodedit/editfood';
 import {ViewmacroPage} from '../pages/nutrition/macro/macro';
 import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
+import {MeasurementPage} from '../pages/measurement/measurement';
+import {BodyfatcatPage} from '../pages/measurement/bodyfatcat/bodyfatcat';
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
@@ -40,7 +42,7 @@ import { NutritionService } from '../providers/nutritionService';
 
 @NgModule({
   declarations: [
-    ConferenceApp,
+    GenomaxxApp,
     TimeAgoPipe,
     LoginPage,
     MyhubPage,
@@ -55,17 +57,19 @@ import { NutritionService } from '../providers/nutritionService';
     LognutplanPage,
     PlansPage,
     NgInitDirective,
-    CalendarModalPage,
     FoodlistPage,
+    FoodaddPage,
     FoodviewPage,
     EditfoodPage,
     ViewmacroPage,
-    ShoppingListPage
+    ShoppingListPage,
+    MeasurementPage,
+    BodyfatcatPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(ConferenceApp, {}, {
+    IonicModule.forRoot(GenomaxxApp, {}, {
       links: [
             { component: LoginPage, name: 'LoginPage', segment: 'login' },
             { component: DisclaimerPage, name: 'Disclaimer', segment: 'disclaimer' },
@@ -74,7 +78,8 @@ import { NutritionService } from '../providers/nutritionService';
             { component: MessagesPage, name: 'MessagesPage', segment: 'messages' },
             { component: NotesPage, name: 'NotesPage', segment: 'notes' },
             { component: NutritionPage, name: 'NutritionPage', segment: 'Nutrition' },
-            { component: ShoppingListPage, name: 'ShoppingListPage', segment: 'ShoppingList' } 
+            { component: ShoppingListPage, name: 'ShoppingListPage', segment: 'ShoppingList' },
+            { component: MeasurementPage, name: 'MeasurementPage', segment: 'Measurements' } 
       ]
     }),
     IonicStorageModule.forRoot(),
@@ -82,7 +87,7 @@ import { NutritionService } from '../providers/nutritionService';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    ConferenceApp,
+    GenomaxxApp,
     LoginPage,
     MyhubPage,
     SettingsPage,
@@ -95,12 +100,14 @@ import { NutritionService } from '../providers/nutritionService';
     NutritionPage,
     LognutplanPage,
     PlansPage,
-    CalendarModalPage,
     FoodlistPage,
+    FoodaddPage,
     FoodviewPage,
     EditfoodPage,
     ViewmacroPage,
-    ShoppingListPage
+    ShoppingListPage,
+    MeasurementPage,
+    BodyfatcatPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

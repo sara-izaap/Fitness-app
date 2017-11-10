@@ -4,8 +4,8 @@ import {NavController} from 'ionic-angular';
 
 import { UserService } from '../../providers/userService';
 import { GlobalVars } from '../../providers/globalVars';
-import { NutritionPage } from '../nutrition/nutrition';
 import { PlansPage } from '../nutrition/plans/plans';
+import {MeasurementPage} from '../measurement/measurement';
 
 
 @Component({
@@ -37,20 +37,17 @@ export class MyhubPage {
 
   }
 
-  openmodule(){
+  openmodule(type:string){
 
-    let type = 'nutrition';
-    
-    if(type == 'nutrition'){
+    let date:any = new Date();
 
-      let date = new Date();
-
-      if(this.nutrition)
+    if(type == 'nutrition')
         this.navCtrl.push(PlansPage,date);
-      else
-        this.navCtrl.push(NutritionPage);
-    }
 
+    if(type == 'measurement')
+      this.navCtrl.push(MeasurementPage);
+      
+    
   }
 
   

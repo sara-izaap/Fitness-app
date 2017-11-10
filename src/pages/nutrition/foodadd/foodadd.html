@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Create Food Item</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+	
+  <form #foodForm="ngForm" novalidate>
+
+      <ion-item-group>    
+        <ion-item-divider sticky mode="ios" >
+          <h2>1 - General</h2>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label stacked>Name</ion-label>
+          <ion-input type="text" [(ngModel)]="food.name" placeholder="Name of your food / drink item" name="name" #name="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>serving Size</ion-label>
+          <ion-input type="number" pattern="[0-9]*" [(ngModel)]="food.serving_size" name="serving_size" #serving_size="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Unit Measurement</ion-label>
+          <ion-select [(ngModel)]="food.unit" name="unit" #unit="ngModel" required>          
+            <ion-option *ngFor="let unit of units" [value]="unit.id">{{unit.unit_name}}</ion-option>       
+          </ion-select>
+        </ion-item>
+
+        <ion-item-divider sticky mode="ios">
+          <h2>2 - Nutrition Facts</h2>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label stacked>Calories</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.calories" name="calories" #calories="ngModel" required></ion-input>
+        </ion-item>
+
+         <ion-item>
+          <ion-label stacked>Protein(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.protein" name="protein" #protein="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Total Carbohydrates(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.carbohydrate" name="carbohydrate" #carbohydrate="ngModel" required></ion-input>
+        </ion-item>
+
+         <ion-item>
+          <ion-label stacked>Sugars(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.sugars" name="sugars" #sugars="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Total Fat(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.fat" name="fat" #fat="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Saturated Fat(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.saturated" name="saturated" #saturated="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Polyunsaturated Fat(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.polyunsaturated" name="polyunsaturated" #polyunsaturated="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Monounsaturated(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.monounsaturated" name="monounsaturated" #monounsaturated="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Cholestrol(mg)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.cholestrol" name="cholestrol" #cholestrol="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Sodium(mg)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.sodium" name="sodium" #sodium="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Potassium(mg)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.potassium" name="potassium" #potassium="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Diatary Fibre(g)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.fibre" name="fibre" #fibre="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Vitamin A(%)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.vitamin_a" name="vitamin_a" #vitamin_a="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Vitamin C(%)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.vitamin_c" name="vitamin_c" #vitamin_c="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Calcium(%)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.calcium" name="calcium" #calcium="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+         <ion-label stacked>Iron(%)</ion-label>
+         <ion-input type="number" pattern="[0-9]*"  [(ngModel)]="food.iron" name="iron" #iron="ngModel" required></ion-input>
+        </ion-item>
+
+        <ion-row responsive-sm>
+          <ion-col>
+            <button ion-button (click)="Addfood(foodForm)" type="submit" block>CREATE FOOD ITEM</button>
+          </ion-col>
+        </ion-row>
+
+      </ion-item-group>  
+  </form>    
+
+</ion-content>

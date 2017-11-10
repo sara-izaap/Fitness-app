@@ -17,28 +17,28 @@
     </ion-card-content>
   </ion-card>
 
-    <ion-list radio-group [(ngModel)]="value" no-ellipse>
+    <ion-list>
         <ion-card *ngFor="let plans of defaultplans">
-          <ion-item>
+          <ion-item (click)="selectplan(plans.id)">
               <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
-              <ion-label>{{plans.name}}</ion-label>
-              <ion-radio name="plan_name" value="{{plans.id}}"></ion-radio>
+              <h3>{{plans.name}}</h3>
+              <ion-icon *ngIf="selectedplan == plans.id" item-end color="primary" name="md-checkmark" ion-icon-large></ion-icon>
           </ion-item>
         </ion-card>
         <ion-card>
-          <ion-item>
+          <ion-item (click)="selectplan('ownplan')">
               <ion-icon item-start color="primary" name="md-restaurant" ></ion-icon>
-              <ion-label>No Nutrition Plan</ion-label>
-              <ion-radio name="plan_name" value="ownplan"></ion-radio> 
+              <h3>No Nutrition Plan</h3>
+              <ion-icon *ngIf="selectedplan == 'ownplan'" item-end color="primary" name="md-checkmark" ion-icon-large></ion-icon>
           </ion-item>
           <ion-card-content>
             <p>Log your own nutrition. Don't follow a set Nutrition plans.</p>
           </ion-card-content>
         </ion-card>
 
-        <ion-row responsive-sm *ngIf="value">
+        <ion-row responsive-sm *ngIf="selectedplan">
           <ion-col>
-            <button ion-button (click)="nutritionLogplan(value)" block>Next</button>
+            <button ion-button (click)="nutritionLogplan(selectedplan)" block>Next</button>
           </ion-col>
         </ion-row>
 
@@ -65,7 +65,7 @@
       </ion-list>
       
       <ion-item-group *ngFor="let meal of mealPlans" class="planwrap">
-        <ion-item-divider light>
+        <ion-item-divider sticky mode="ios">
             <h2>{{meal}}</h2>
             <ion-note item-end>{{calculate(meal)}} cal</ion-note>
         </ion-item-divider>

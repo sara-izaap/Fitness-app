@@ -10,7 +10,7 @@
 <ion-content>
 
   <ion-item-group *ngFor="let meal of mealPlans" class="planwrap">
-    <ion-item-divider light>
+    <ion-item-divider sticky mode="ios">
         <h2>{{meal}}</h2>
         <ion-note item-end>{{calculate(meal)}} cal</ion-note>
     </ion-item-divider>

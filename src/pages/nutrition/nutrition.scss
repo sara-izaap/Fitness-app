@@ -52,7 +52,24 @@ page-speaker-list {
   font-size:2em;
 }
 
-page-calendar{margin-top:60px;}
+ion-calendar-modal{ margin-top:65px;
+  
+}
+
+.days-btn.today {
+  color:#488aff !important;
+
+  p {
+    color:#488aff !important;
+  }
+}
+
+.days-btn.today.on-selected{
+ p {
+    color:#fff !important;
+  } 
+}
+
 
 [fab--bottom] {
   padding-bottom: 30px;
@@ -85,13 +102,6 @@ page-nutrition,page-plans{
       background: rgba(0, 0, 0, 0.33);
 }
 
-.days-btn.today {
-  background:#488aff;
-
-  p {
-    color:#fff !important;
-  }
-}
 
 ion-calendar{
   padding:0 !important;

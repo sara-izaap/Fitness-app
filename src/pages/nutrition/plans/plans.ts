@@ -1,9 +1,9 @@
 import { Component,Directive, Input, ViewContainerRef, TemplateRef } from '@angular/core';
 import {NavController, ModalController, AlertController,FabContainer,NavParams,LoadingController } from 'ionic-angular';
+import { CalendarModal, CalendarModalOptions, CalendarResult } from "ion2-calendar";
 import * as moment from 'moment'
 import { GlobalVars } from '../../../providers/globalVars';
 import { NutritionService } from '../../../providers/nutritionService';
-import{ CalendarModalPage } from '../calendarModal';
 import { FoodlistPage } from '../food/foodList';
 import {EditfoodPage} from '../foodedit/editfood';
 import {ViewmacroPage} from '../macro/macro';
@@ -31,10 +31,10 @@ export class PlansPage {
   user_id:any;
   defaultplans:any;
   date:any = new Date();
-  planData:any=[];
+  planData:any={};
   mealPlans:any=[];
   segment:string = "plan";
-  value:any="";
+  selectedplan:any="";
   nutritionplans:any="";
   getData:any;
   plandropdown:any = false;
@@ -75,18 +75,36 @@ export class PlansPage {
 
   }
 
+  selectplan(plan:any){
+    this.selectedplan = plan;
+  }
+
   openCalendar(){
 
-    let myCalendar =  this.modalCtrl.create(CalendarModalPage, { date: this.date});
+    let backdate:any = new Date();
+    backdate.setFullYear(backdate.getFullYear()-5, '01','01');
 
+    const options: CalendarModalOptions = {  
+      pickMode: 'single',      
+      canBackwardsSelected:true,
+      from: backdate,
+      defaultScrollTo:this.date,
+      defaultDate: this.date,
+      closeIcon:true,
+      autoDone: true
+    };
+    let myCalendar =  this.modalCtrl.create(CalendarModal, {
+      options: options
+    });
+ 
     myCalendar.present();
+ 
+    myCalendar.onDidDismiss((data: CalendarResult, type: string) => {
 
-    myCalendar.onDidDismiss(data => {
-
-      if(data && moment(this.date).format('YYYY-MM-DD') != moment(data).format('YYYY-MM-DD')){
-        this.date = new Date(data);
+      if(type=='done' && moment(this.date).format('YYYY-MM-DD') != moment(data.string).format('YYYY-MM-DD')){
+        this.date = new Date(data.string);
         this.checkdata(this.date);
-      }          
+      }   
       console.log(data);
     })
 
@@ -110,7 +128,7 @@ export class PlansPage {
       }
       else{
         this.segment="plan";
-        this.value="";
+        this.selectedplan="";
         this.plandropdown = true;
       }
       loading.dismiss();

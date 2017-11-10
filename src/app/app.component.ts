@@ -1,12 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { Network } from '@ionic-native/network';
-
 import { Events, MenuController, Nav, Platform,App,ToastController } from 'ionic-angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
 import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../pages/login/login';
@@ -16,6 +13,8 @@ import { MessagesPage } from '../pages/messages/messages';
 import { NotesPage } from '../pages/notes/notes';
 import { NutritionPage } from '../pages/nutrition/nutrition';
 import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
+import {MeasurementPage} from '../pages/measurement/measurement';
+
 
 export interface PageInterface {
   title: string;
@@ -31,7 +30,7 @@ export interface PageInterface {
 @Component({
   templateUrl: 'app.template.html'
 })
-export class ConferenceApp {
+export class GenomaxxApp {
  
   @ViewChild(Nav) nav: Nav; 
 
@@ -42,7 +41,7 @@ export class ConferenceApp {
     { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
     { title: 'Nutrition', name: 'NutritionPage', component: NutritionPage, icon: 'md-restaurant' },
     { title: 'Shopping List', name: 'ShoppingListPage', component:ShoppingListPage, icon: 'ios-cart' },
-    { title: 'Measurements', name: 'MeasurementPage', component: '', icon: 'ios-barcode' },
+    { title: 'Measurements', name: 'MeasurementPage', component: MeasurementPage, icon: 'ios-barcode' },
     { title: 'Progress Photos', name: 'ProgressPage', component: '', icon: 'md-images' },
     { title: 'Calender', name: 'CalenderPage', component: '', icon: 'md-calendar' },
     { title: 'Notes', name: 'NotesPage', component: NotesPage, icon: 'ios-copy' },

@@ -59,4 +59,20 @@ export class NutritionService {
 
     }
 
+    getUnitmeasures(){
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(apiUrl + 'nutrition/unitmeasures', options).map(res => res.json()).toPromise();
+    }
+
+    SaveFood(food:any){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(apiUrl + 'nutrition/creatfood', food, options).map(res => res.json())
+            .toPromise();
+    }
+
 }

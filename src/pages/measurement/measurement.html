@@ -1,0 +1,680 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Measurements</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="measurements">
+  
+  <ion-segment mode="md" [(ngModel)]="segment" custom-segment>
+    <ion-segment-button value="measurement" >
+      Measurements
+    </ion-segment-button>
+    <ion-segment-button value="bodyfat">
+      Body Fat
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="segment === 'measurement'">
+    
+      <ion-item-group>
+        <ion-item-divider light mode="ios">
+            <h2>New Weight</h2>
+        </ion-item-divider>
+        
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="weight_units" >
+            <ion-segment-button value="kg">KG</ion-segment-button>
+            <ion-segment-button value="st">ST</ion-segment-button>
+            <ion-segment-button value="lbs">LBS</ion-segment-button>
+          </ion-segment>
+
+          <ion-grid [ngSwitch]="weight_units">
+            <ion-row responsive-sm text-center *ngSwitchCase="'kg'">
+              <ion-col col-6>
+                <ion-item class="form--border no--drop--icon">
+                   <ion-input type="number" [(ngModel)]="weightval.kg_num" name="kg_num"></ion-input>
+                </ion-item>
+              </ion-col> 
+              <ion-col col-1>
+                <h2>.</h2>
+              </ion-col>
+              <ion-col col-5>
+                <ion-item class="form--border drop--icon">
+                  <ion-select [(ngModel)]="weightval.kg_float" name="kg_float">
+                      <ion-option *ngFor="let i of counter(10);let n = index" [value]="n">{{n}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>  
+            </ion-row>
+
+            <ion-row responsive-sm text-center *ngSwitchCase="'st'">
+              <ion-col col-6>
+                <ion-item class="form--border drop--icon">
+                   <ion-select [(ngModel)]="weightval.st_num" name="st_num">
+                      <ion-option *ngFor="let i of counter(78);let n = index" [value]="n+1">{{n+1}}</ion-option>
+                   </ion-select>
+                </ion-item>
+              </ion-col> 
+              <ion-col col-1>
+                <h2>.</h2>
+              </ion-col>
+              <ion-col col-5>
+                <ion-item class="form--border drop--icon">
+                  <ion-select [(ngModel)]="weightval.st_float" name="st_float">
+                      <ion-option *ngFor="let i of counter(14);let n = index" [value]="n">{{n}}</ion-option>
+                   </ion-select>
+                </ion-item>
+              </ion-col>  
+            </ion-row>
+
+            <ion-row responsive-sm text-center *ngSwitchCase="'lbs'">
+              <ion-col col-6>
+                <ion-item class="form--border drop--icon">
+                   <ion-select [(ngModel)]="weightval.lbs_num" name="lbs_num">
+                      <ion-option *ngFor="let i of counter(650);let n = index" [value]="n+1">{{n+1}}</ion-option>
+                   </ion-select>
+                </ion-item>
+              </ion-col> 
+              <ion-col col-1>
+                <h2>.</h2>
+              </ion-col>
+              <ion-col col-5>
+                <ion-item  class="form--border drop--icon">
+                  <ion-select [(ngModel)]="weightval.lbs_float" name="lbs_float">
+                      <ion-option *ngFor="let i of counter(10);let n = index" [value]="n">{{n}}</ion-option>
+                   </ion-select>
+                </ion-item>
+              </ion-col>  
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+
+        <ion-item-divider light mode="ios">
+            <h2>Body side</h2>
+        </ion-item-divider>
+        
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="mea_bodyside" >
+            <ion-segment-button value="left">Left</ion-segment-button>
+            <ion-segment-button value="right">Right</ion-segment-button>
+          </ion-segment>
+        </ion-item> 
+
+        <ion-item-divider light mode="ios">
+            <h2>Measurement Units</h2>
+        </ion-item-divider>
+        
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="mea_units">
+            <ion-segment-button value="mmcm">MM / CM</ion-segment-button>
+            <ion-segment-button value="inches">INCHES</ion-segment-button>
+          </ion-segment>
+        </ion-item>  
+
+        <div *ngIf="mea_units === 'mmcm'">
+          <ion-item>
+            <ion-label stacked>Neck(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].neck" name="neck"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Chest(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].chest" name="chest"></ion-input>
+          </ion-item>  
+          <ion-item>
+            <ion-label stacked>Arm(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].arm" name="arm"></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Waist(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].waist" name="waist"></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Hips(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].hips" name="hips"></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Thigh(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].thigh" name="thigh"></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Calf(cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="mea_mmcm[mea_bodyside].calf" name="calf"></ion-input>
+          </ion-item> 
+        </div> 
+
+        <div *ngIf="mea_units === 'inches'">
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Neck(in.)</ion-label>
+              <ion-item class="form--border">
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].neck" name="neck"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+                <ion-label stacked>&nbsp;</ion-label>
+                <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].neck_float" name="neck_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Chest(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].chest" name="chest" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].chest_float" name="chest_float"  class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Arm(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].arm" name="arm" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].arm_float" name="arm_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Waist(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].waist" name="waist" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].waist_float" name="waist_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Hips(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].hips" name="hips" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].hips_float" name="hips_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Thigh(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].thigh" name="thigh" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].thigh_float" name="thigh_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Calf(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="mea_inches[mea_bodyside].calf" name="calf" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="mea_inches[mea_bodyside].calf_float" name="calf_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+        </div>   
+
+        <ion-row responsive-sm>
+          <ion-col>
+            <button ion-button block (click)="saveMeasurement()">SAVE MEASUREMENT UPDATES</button>
+          </ion-col>
+        </ion-row>
+
+      </ion-item-group>  
+
+      <ion-item-group>
+        <ion-item-divider mode="ios">
+            <h2>Previous Measurements</h2>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="mea_bodyside" >
+            <ion-segment-button value="left">Left</ion-segment-button>
+            <ion-segment-button value="right">Right</ion-segment-button>
+          </ion-segment>
+        </ion-item> 
+
+        <ion-item *ngIf="response==''" text-center>
+          <h2>No measurement units</h2>
+        </ion-item>  
+
+      </ion-item-group>  
+
+      <ion-item-group *ngFor="let res of response" padding>
+        <ion-item-divider sticky mode="ios">
+            <h2>{{res.date | date:'dd MMM yyyy'}}</h2>
+            <ion-note item-end (click)="DeleteMeasurement(res.date,res.id,'measurement')"><ion-icon color="primary" name="md-more"></ion-icon></ion-note>
+        </ion-item-divider>
+
+        <ion-item>
+          <h3>Weight</h3>
+          <ion-note item-end>{{res.weight}}{{res.weight_unit}}</ion-note>
+        </ion-item> 
+
+        <ion-item>
+          <h3>Neck</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].neck">{{res.measurement['mmcm'][mea_bodyside].neck}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].neck">{{res.measurement['inches'][mea_bodyside].neck}} {{res.measurement['inches']['left'].neck_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Chest</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].chest">{{res.measurement['mmcm'][mea_bodyside].chest}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].neck">{{res.measurement['inches'][mea_bodyside].chest}} {{res.measurement['inches']['left'].chest_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Arm</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].arm">{{res.measurement['mmcm'][mea_bodyside].arm}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].arm">{{res.measurement['inches'][mea_bodyside].arm}} {{res.measurement['inches']['left'].arm_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Waist</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].waist">{{res.measurement['mmcm'][mea_bodyside].waist}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].waist">{{res.measurement['inches'][mea_bodyside].waist}} {{res.measurement['inches']['left'].waist_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Hips</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].hips">{{res.measurement['mmcm'][mea_bodyside].hips}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].hips">{{res.measurement['inches'][mea_bodyside].hips}} {{res.measurement['inches']['left'].hips_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Thigh</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].thigh">{{res.measurement['mmcm'][mea_bodyside].thigh}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].thigh">{{res.measurement['inches'][mea_bodyside].thigh}} {{res.measurement['inches']['left'].thigh_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Calf</h3>
+          <ion-note item-end *ngIf="mea_units === 'mmcm' && res.measurement['mmcm'][mea_bodyside].calf">{{res.measurement['mmcm'][mea_bodyside].calf}} cm</ion-note>
+          <ion-note item-end *ngIf="mea_units === 'inches' && res.measurement['inches'][mea_bodyside].calf">{{res.measurement['inches'][mea_bodyside].calf}} {{res.measurement['inches']['left'].calf_float}}"</ion-note>
+        </ion-item>
+
+      </ion-item-group> 
+  </div>
+
+
+
+  
+  <div *ngIf="segment === 'bodyfat'">
+      
+      <ion-item-group>
+
+        <ion-item-divider light mode="ios">
+            <h2>Body side</h2>
+        </ion-item-divider>
+        
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="fat_bodyside" >
+            <ion-segment-button value="left">Left</ion-segment-button>
+            <ion-segment-button value="right">Right</ion-segment-button>
+          </ion-segment>
+        </ion-item> 
+
+        <ion-item-divider light mode="ios">
+            <h2>Measurement Units</h2>
+        </ion-item-divider>
+        
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="fat_units">
+            <ion-segment-button value="mmcm">MM / CM</ion-segment-button>
+            <ion-segment-button value="inches">INCHES</ion-segment-button>
+          </ion-segment>
+        </ion-item> 
+
+        <div *ngIf="fat_units === 'mmcm'">
+
+          <ion-item>
+            <ion-label stacked>Chest(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].chest" maxlength="4" name="chest" max="99" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Tricep(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].tricep" maxlength="4" name="tricep" max="99" required></ion-input>
+          </ion-item>  
+          <ion-item>
+            <ion-label stacked>Bicep(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].bicep" maxlength="4" name="bicep" max="99" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Subscapular(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].subscapular" maxlength="4" name="subscapular" max="99" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Midaxillary(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].midaxillary" maxlength="4" name="midaxillary" max="99" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Abdominal(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].abdominal" maxlength="4" name="abdominal" max="99" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Suprailiac(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].suprailiac" maxlength="4" name="suprailiac" max="99" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Thigh(mm)</ion-label>
+            <ion-input type="number" [(ngModel)]="fat_mmcm[fat_bodyside].thigh" maxlen
+            gth="4" name="thigh" max="99" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label stacked>Total Body Fat%({{fat_bodyside}})</ion-label>
+            <ion-input type="number" [(ngModel)]="calculate[fat_bodyside]" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <h2>Total Body Fat %</h2>
+            <ion-note item-end (click)="Viewbodyfatcat()"><ion-icon color="primary" name="ios-information-circle" ion-icon-large></ion-icon></ion-note>
+          </ion-item> 
+          <ion-item>
+              <ion-input type="number" [(ngModel)]="calculate.total" readonly></ion-input>
+              <ion-note item-end><button ion-button (click)="calculatefat()" gradient-button-gray>Calculate</button></ion-note>
+          </ion-item> 
+
+        </div> 
+
+        <div *ngIf="fat_units === 'inches'">
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Chest(in.)</ion-label>
+              <ion-item class="form--border">
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].chest" name="chest"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+                <ion-label stacked>&nbsp;</ion-label>
+                <ion-item>
+                  <ion-select [(ngModel)]="fat_inches[fat_bodyside].chest_float" name="chest_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Tricep(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].tricep" name="tricep" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].tricep_float" name="tricep_float"  class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Bicep(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].bicep" name="bicep" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].bicep_float" name="bicep_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Subscapular(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].subscapular" name="subscapular" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].subscapular_float" name="subscapular_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Midaxillary(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].midaxillary" name="midaxillary" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].midaxillary_float" name="midaxillary_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Abdominal(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].abdominal" name="abdominal" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].abdominal_float" name="abdominal_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+          <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Suprailiac(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].suprailiac" name="suprailiac" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].suprailiac_float" name="suprailiac_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+
+           <ion-row class="mea--inches">        
+            <ion-col>
+              <ion-label stacked>Thigh(in.)</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="fat_inches[fat_bodyside].thigh" name="thigh" class="form--border"></ion-input>
+              </ion-item>
+            </ion-col> 
+            <ion-col >
+              <ion-label stacked>&nbsp;</ion-label>
+              <ion-item>
+                <ion-select [(ngModel)]="fat_inches[fat_bodyside].thigh_float" name="thigh_float" class="form--border">
+                    <ion-option *ngFor="let i of meaunit_inches" [value]="i">{{i}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> 
+          </ion-row>
+          <ion-item>
+            <ion-label stacked>Total Body Fat%({{fat_bodyside}})</ion-label>
+            <ion-input type="number" [(ngModel)]="calculate[fat_bodyside]" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <h2>Total Body Fat %</h2>
+            <ion-note item-end (click)="Viewbodyfatcat()"><ion-icon color="primary" name="ios-information-circle"></ion-icon></ion-note>
+          </ion-item> 
+          <ion-item>
+              <ion-input type="number" [(ngModel)]="calculate.total" readonly></ion-input>
+              <ion-note item-end><button ion-button (click)="calculatefat()" gradient-button-gray>Calculate</button></ion-note>
+          </ion-item> 
+
+        </div>   
+
+        <ion-row responsive-sm>
+          <ion-col>
+            <button ion-button block (click)="savebodyFat()">SAVE BODYFAT UPDATES</button>
+          </ion-col>
+        </ion-row> 
+
+      </ion-item-group>  
+
+      <ion-item-group>
+        <ion-item-divider mode="ios">
+            <h2>Previous Body Fat Percentages</h2>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-segment mode="ios" [(ngModel)]="fat_bodyside" >
+            <ion-segment-button value="left">Left</ion-segment-button>
+            <ion-segment-button value="right">Right</ion-segment-button>
+          </ion-segment>
+        </ion-item> 
+
+        <ion-item *ngIf="bodyfatres==''" text-center>
+          <h2>No Bodyfat Percents</h2>
+        </ion-item>  
+
+      </ion-item-group>  
+
+      <ion-item-group *ngFor="let res of bodyfatres" padding>
+        <ion-item-divider sticky mode="ios">
+            <h2>{{res.date | date:'dd MMM yyyy'}}</h2>
+            <ion-note item-end (click)="DeleteMeasurement(res.date,res.id,'bodyfat')"><ion-icon color="primary" name="md-more"></ion-icon></ion-note>
+        </ion-item-divider>
+
+        <ion-item>
+          <h3>Chest</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].chest">{{res.bodyfat['mmcm'][fat_bodyside].chest}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].chest">{{res.bodyfat['inches'][fat_bodyside].chest}} {{res.bodyfat['inches'][fat_bodyside].chest_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Tricep</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].tricep">{{res.bodyfat['mmcm'][fat_bodyside].tricep}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].tricep">{{res.bodyfat['inches'][fat_bodyside].tricep}} {{res.bodyfat['inches'][fat_bodyside].tricep_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Bicep</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].bicep">{{res.bodyfat['mmcm'][fat_bodyside].bicep}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].bicep">{{res.bodyfat['inches'][fat_bodyside].bicep}} {{res.bodyfat['inches'][fat_bodyside].bicep_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Subscapular</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].subscapular">{{res.bodyfat['mmcm'][fat_bodyside].subscapular}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].subscapular">{{res.bodyfat['inches'][fat_bodyside].subscapular}} {{res.bodyfat['inches'][fat_bodyside].subscapular_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Midaxillary</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].midaxillary">{{res.bodyfat['mmcm'][fat_bodyside].midaxillary}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].midaxillary">{{res.bodyfat['inches'][fat_bodyside].midaxillary}} {{res.bodyfat['inches'][fat_bodyside].midaxillary_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Abdominal</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].abdominal">{{res.bodyfat['mmcm'][fat_bodyside].abdominal}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].abdominal">{{res.bodyfat['inches'][fat_bodyside].abdominal}} {{res.bodyfat['inches'][fat_bodyside].abdominal_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Suprailiac</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].suprailiac">{{res.bodyfat['mmcm'][fat_bodyside].suprailiac}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].suprailiac">{{res.bodyfat['inches'][fat_bodyside].suprailiac}} {{res.bodyfat['inches'][fat_bodyside].suprailiac_float}}"</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <h3>Thigh</h3>
+          <ion-note item-end *ngIf="fat_units === 'mmcm' && res.bodyfat['mmcm'][fat_bodyside].thigh">{{res.bodyfat['mmcm'][fat_bodyside].thigh}} mm</ion-note>
+          <ion-note item-end *ngIf="fat_units === 'inches' && res.bodyfat['inches'][fat_bodyside].thigh">{{res.bodyfat['inches'][fat_bodyside].thigh}} {{res.bodyfat['inches'][fat_bodyside].thigh_float}}"</ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <h3>Body Fat({{fat_bodyside}})</h3>
+          <ion-note item-end *ngIf="fat_bodyside === 'left' && res['left_fat']" >{{res['left_fat']}} %</ion-note> 
+          <ion-note item-end *ngIf="fat_bodyside === 'right' && res['right_fat']" >{{res['right_fat']}} %</ion-note>       
+        </ion-item>
+
+        <ion-item>
+          <h3>Body Fat(total)</h3>
+          <ion-note item-end *ngIf="res['total_fat']">{{res['total_fat']}} %</ion-note>        
+        </ion-item>
+
+      </ion-item-group> 
+
+  </div>      
+
+
+</ion-content>
