@@ -1,0 +1,176 @@
+<ion-header>
+
+  <ion-toolbar *ngIf="finishWorkout === false">
+    <ion-buttons>
+      <button clear>Log Workout</button>
+    </ion-buttons>
+    <ion-buttons end>
+
+        <button *ngIf="isEditable === false" (click)="dismiss()"><ion-icon name="md-close" ion-icon-large> </ion-icon></button >
+        <button *ngIf="workoutData.length > 0 && isEditable === true" (click)="Reorder()">Reorder</button>
+
+        <button *ngIf="notes" (click)="OpenNote('session',1)"><ion-icon name="md-document" ion-icon-large> </ion-icon></button >
+        <button *ngIf="workoutData.length > 0 && isEditable === false" (click)="isEditable = true">
+          <ion-icon name="md-create" ion-icon-large> </ion-icon>          
+        </button >
+        <button *ngIf="workoutData.length > 0 && isEditable === true" (click)="isEditable = false">
+          <ion-icon  name="md-checkmark" ion-icon-large> </ion-icon>
+        </button >
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="finishWorkout === true">
+    <ion-buttons>
+      <button clear (click)="finishWorkout = false"><ion-icon name="md-arrow-back" ion-icon-large> </ion-icon></button>
+    </ion-buttons>
+    <ion-title>Workout Finished</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>	
+
+  <div *ngIf="finishWorkout === false">
+
+    <ion-list *ngIf="activated && workoutData.length == 0" padding>
+      <ion-item text-center> <img src="assets/img/icon__workout.png" alt=""> </ion-item>
+      <ion-item text-center> <h2>Log Your Workout</h2></ion-item>
+      <ion-item text-center text-wrap> <p>Add an exercise to start logging this workout</p></ion-item>
+    </ion-list>  
+
+    <div *ngIf="workoutData.length > 0" >
+
+      <ion-list *ngFor="let row of workoutData; let p=index ">
+         
+          <ion-item mode="ios" text-wrap workoutinfo-button>
+            <ion-row>
+             <ion-col (click)="ExerciseInfo(row)">
+              {{row.exercise_name}} <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+             </ion-col>             
+           </ion-row>
+
+           <ion-row>             
+             <ion-col text-right>
+                <button *ngIf="row.notes" ion-button icon-only round color="primary" (click)="OpenNote('exercise',row)" >
+                  <ion-icon name="ios-document-outline"> </ion-icon>
+                </button>
+                <button ion-button icon-only round color="primary" (click)="History(row)">
+                  <ion-icon name="ios-timer-outline"></ion-icon>
+                </button>  
+                <button *ngIf="row.allow_set == 'Y'" ion-button icon-only round color="primary" >
+                  <ion-icon name="ios-nuclear-outline"></ion-icon>
+                </button> 
+                <button ion-button icon-only round color="primary">
+                  <ion-icon name="ios-repeat-outline"></ion-icon>
+                </button>  
+             </ion-col>
+           </ion-row>
+          </ion-item>
+          
+          <ion-item workouttable>
+
+            <table>
+              <thead>
+                  <tr text-uppercase>
+                    <th *ngIf="row.allow_set == 'Y'">#</th>
+                    <th *ngFor="let head of row['logcol']"> {{head}}</th>
+                    <th><ion-icon name="ios-checkmark" ion-icon-large> </ion-icon></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let val of row['data'];let i=index ">
+
+                    <td *ngIf="row.allow_set == 'Y'">{{i+1}}</td>
+
+                    <td *ngFor="let en of val;let j=index ">                     
+                            
+                        <span *ngFor="let num of en.split(':');let k = index " >
+                          <span *ngIf="k == '1'"> : </span>
+                          
+                          <span *ngIf="row['nonedit'][j] === true" #e1 contenteditable="true" (blur)="setEditVal(p,i,j,k,e1.innerText)" [contenteditableModel]="num"></span>
+
+                          <span *ngIf="row['nonedit'][j] === false" #e1 contenteditable="false" (blur)="setEditVal(p,i,j,k,e1.innerText)" [contenteditableModel]="num"></span>                     
+                        </span>
+                    </td>
+                    <td>
+                      <ion-icon *ngIf="isEditable === false" name="ios-checkmark" ion-icon-large></ion-icon>
+                      <ion-icon *ngIf="isEditable === true && row.allow_set == 'Y'" (click)="DeleteSet(p,i)" color="danger" name="md-trash"></ion-icon>
+                    </td>
+                  </tr>  
+
+                  <tr *ngIf="row.allow_set == 'Y'">
+                    <td colspan="7">
+                      <button *ngIf="isEditable === false" ion-button (click)="AddSet(p,row.exercise_id,row.set_type)" clear block>Add {{row.set_type}}</button>
+                      <button *ngIf="isEditable === true" ion-button clear block (click)="DeleteExercise(p)" color="danger">Delete Exercise</button>
+                    </td>
+                 </tr>
+                 <tr *ngIf="row.allow_set == 'N' && isEditable === true">
+                    <td colspan="7">                    
+                      <button ion-button clear block (click)="DeleteExercise(p)" color="danger" >Delete Exercise</button>
+                    </td>
+                 </tr>            
+              </tbody>
+            </table>
+    
+          </ion-item>  
+      
+      </ion-list>  
+
+    </div>
+      
+    <ion-list>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="AddExercise()" outline block>ADD EXERCISE</button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="workoutData.length > 0" responsive-sm>
+        <ion-col>
+          <button ion-button (click)="finishWorkout = true" block>FINISH WORKOUT</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+  </div>  
+
+  <div *ngIf="finishWorkout === true">
+      
+      <ion-list padding>
+
+        <ion-item text-center> <ion-icon color="primary" name="md-thumbs-up" timer-play></ion-icon> </ion-item>
+
+        <ion-item text-center> <h2>Awesome, you have finished!</h2></ion-item>
+        
+        <ion-item text-center text-wrap> <p>Is there anything that you'd like to note about this workout?</p></ion-item>
+
+        <ion-item> 
+            <ion-textarea [(ngModel)]="workout_notes" name="workout_notes" ></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Save as Workout Template?</ion-label>
+          <ion-toggle [(ngModel)]="followtemp" color="primary"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="followtemp">
+          <ion-input type="text" [(ngModel)]="temp_title" placeholder="Enter a title"></ion-input>
+        </ion-item>
+
+        <ion-row  responsive-sm>
+          <ion-col>
+            <button ion-button (click)="SaveWorkout()" block>FINISH WORKOUT</button>
+          </ion-col>
+        </ion-row>
+
+    </ion-list>  
+
+  </div>  
+
+  <ion-fab *ngIf="finishWorkout === false" right bottom>
+    <button ion-fab color="primary" (click)="Timer()"><ion-icon name="md-alarm"></ion-icon></button>     
+  </ion-fab>
+
+</ion-content>

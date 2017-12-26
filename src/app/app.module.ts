@@ -10,9 +10,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { GenomaxxApp } from './app.component';
-import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/settings/settings';
@@ -33,12 +33,25 @@ import {ViewmacroPage} from '../pages/nutrition/macro/macro';
 import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
 import {MeasurementPage} from '../pages/measurement/measurement';
 import {BodyfatcatPage} from '../pages/measurement/bodyfatcat/bodyfatcat';
+import {WorkoutPage} from '../pages/workout/workoutPage';
+import {WorkoutView} from '../pages/workout/view/workoutView';
+import {Exerciseinfo} from '../pages/workout/exerciseinfo/exerciseinfo';
+import {SafeHtmlPipe} from '../pages/workout/safeHtmlPipe';
+import {WorkoutNote} from '../pages/workout/workoutNote';
+import {SessionPage} from '../pages/workout/session/sessionPage';
+import {LogWorkout} from '../pages/workout/log/logWorkout';
+import {ContenteditableModel} from '../pages/workout/contenteditable-model';
+import {Stopwatch} from '../pages/workout/timer/stopwatch';
+import {AdddExercisePage} from "../pages/workout/addexercise/addExercise";
+import {ReorderPage} from "../pages/workout/reorder/reorder";
+import {HistoryPage} from "../pages/workout/history/history";
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
 import { AuthService } from '../providers/authService'; 
 import { NoteService } from '../providers/noteService';
 import { NutritionService } from '../providers/nutritionService';
+import { WorkoutService } from '../providers/workoutService';
 
 @NgModule({
   declarations: [
@@ -64,7 +77,19 @@ import { NutritionService } from '../providers/nutritionService';
     ViewmacroPage,
     ShoppingListPage,
     MeasurementPage,
-    BodyfatcatPage
+    BodyfatcatPage,
+    WorkoutPage,
+    WorkoutView,
+    Exerciseinfo,
+    SafeHtmlPipe,
+    WorkoutNote,
+    SessionPage,
+    LogWorkout,
+    ContenteditableModel,
+    Stopwatch,
+    AdddExercisePage,
+    ReorderPage,
+    HistoryPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +104,8 @@ import { NutritionService } from '../providers/nutritionService';
             { component: NotesPage, name: 'NotesPage', segment: 'notes' },
             { component: NutritionPage, name: 'NutritionPage', segment: 'Nutrition' },
             { component: ShoppingListPage, name: 'ShoppingListPage', segment: 'ShoppingList' },
-            { component: MeasurementPage, name: 'MeasurementPage', segment: 'Measurements' } 
+            { component: MeasurementPage, name: 'MeasurementPage', segment: 'Measurements' },
+            { component: WorkoutPage, name: 'WorkoutPage', segment: 'Workouts' } 
       ]
     }),
     IonicStorageModule.forRoot(),
@@ -107,7 +133,17 @@ import { NutritionService } from '../providers/nutritionService';
     ViewmacroPage,
     ShoppingListPage,
     MeasurementPage,
-    BodyfatcatPage
+    BodyfatcatPage,
+    WorkoutPage,
+    WorkoutView,
+    Exerciseinfo,
+    WorkoutNote,
+    SessionPage,
+    LogWorkout,
+    Stopwatch,
+    AdddExercisePage,
+    ReorderPage,
+    HistoryPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -117,6 +153,7 @@ import { NutritionService } from '../providers/nutritionService';
     AuthService,
     NoteService,
     NutritionService,
+    WorkoutService,
     InAppBrowser,
     SplashScreen
   ]

@@ -1,0 +1,57 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Stopwatch</ion-title>     
+	  <ion-buttons end>
+	        <button (click)="dismiss()" picgallery><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+	  </ion-buttons>
+	  
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<!-- <timer #timer [timeInSeconds]="timeseconds"></timer> -->
+
+	<ion-card *ngIf="timer" no-shadow>
+
+		<ion-item text-center>
+		 	<div (click)="pauseTimer()" *ngIf="timer.runTimer && timer.hasStarted && !timer.hasFinished">
+	            <ion-icon color="primary" name="ios-pause" timer-play></ion-icon>	            
+	        </div>      
+	        <div (click)="resumeTimer()"  *ngIf="!timer.runTimer && timer.hasStarted && !timer.hasFinished">
+	            <ion-icon color="primary" name="md-arrow-dropright-circle" timer-play></ion-icon>            
+	        </div>      
+	        <div  (click)="startTimer()"  *ngIf="!timer.hasStarted">
+	            <ion-icon color="primary" name="md-arrow-dropright-circle" timer-play></ion-icon>
+	        </div> 
+
+	    </ion-item>            
+		
+	    <ion-item class="no-bottom-border item" text-center>
+	        <button ion-button *ngIf="timeInSeconds && timeInSeconds > 0" large full clear class="timer-button timer-text">{{timer.displayTime}}</button>
+	    </ion-item>
+
+	    <ion-item text-center *ngIf="timeInSeconds && timeInSeconds > 0">
+	        <button ion-button clear color="danger" small (click)="initTimer()"  *ngIf="!timer.runTimer && (timer.hasStarted || timer.hasFinished) || timer.hasFinished">
+	            <ion-icon name="refresh" ion-icon-large></ion-icon>
+	            Reset
+	        </button>	            
+	    </ion-item>
+	</ion-card>  
+
+	<ion-list *ngIf="!timer.hasStarted">
+		<ion-item>
+	        <ion-label>Minutes</ion-label>
+	        <ion-select [(ngModel)]="minutes" (ionChange)="timecalc()">
+	        	<ion-option *ngFor="let i of counter(5);let n = index" [value]="n">{{n}} min</ion-option>
+	            <ion-option *ngFor="let i of counter(11);let n = index" [value]="(n+1)*5">{{(n+1)*5}} min</ion-option>
+	        </ion-select>
+      </ion-item>
+      <ion-item>
+	        <ion-label>Seconds</ion-label>
+	        <ion-select [(ngModel)]="seconds" (ionChange)="timecalc()">
+	            <ion-option *ngFor="let i of counter(11);let n = index" [value]="(n+1)*5">{{(n+1)*5}} sec</ion-option>
+	        </ion-select>
+      </ion-item>
+	</ion-list>
+
+</ion-content>

@@ -6,6 +6,7 @@ import { UserService } from '../../providers/userService';
 import { GlobalVars } from '../../providers/globalVars';
 import { PlansPage } from '../nutrition/plans/plans';
 import {MeasurementPage} from '../measurement/measurement';
+import {SessionPage} from '../workout/session/sessionPage';
 
 
 @Component({
@@ -46,6 +47,9 @@ export class MyhubPage {
 
     if(type == 'measurement')
       this.navCtrl.push(MeasurementPage);
+
+    if(type == 'workout')
+      this.navCtrl.push(SessionPage);
       
     
   }

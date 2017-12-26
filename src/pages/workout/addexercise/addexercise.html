@@ -1,0 +1,98 @@
+<ion-header>
+<ion-toolbar>
+    <ion-title>Search Exercise</ion-title>
+  <ion-buttons end>
+        <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment  mode="md" [(ngModel)]="segment" custom-segment>
+    <ion-segment-button value="search">
+      SEARCH
+    </ion-segment-button>
+    <ion-segment-button value="bodypart">
+      BODY PART
+    </ion-segment-button>
+    <ion-segment-button value="recent">
+      RECENT
+    </ion-segment-button>
+    <ion-segment-button value="frequent">
+      FREQUENT
+    </ion-segment-button>     
+  </ion-segment>
+  
+  <ion-item-group *ngIf="segment === 'search'">     
+
+    <ion-searchbar [(ngModel)]="searchKey" (ionInput)="onInput()" placeholder="Search Exercises" ></ion-searchbar>
+  
+    <ion-card *ngFor="let row of searchres" (click)="row.type=='Cardio'?Cardioexercise(row.id):Addexercise(row.id);">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/img/icon__workout.png">
+          </ion-avatar>
+          <h2>{{row.name}}</h2>
+        </ion-item>
+    </ion-card>
+
+    <ion-list *ngIf="searchres.length == 0 && searchKey!=''" padding>
+      <ion-item text-center>  <ion-icon color="primary" name="md-search" timer-play></ion-icon></ion-item>
+      <ion-item text-center> <h2>No Results</h2></ion-item>
+      <ion-item text-center text-wrap> <p>No exercises match your query</p></ion-item>
+    </ion-list>  
+
+  </ion-item-group>
+
+  <ion-item-group *ngIf="segment === 'bodypart'">     
+    <ion-item>
+        <ion-label>Bodypart</ion-label>
+        <ion-select #C [(ngModel)]="bodycat" (ionChange)="findByName('bodycat',C.value)">
+            <ion-option *ngFor="let val of bodypartList" [value]="val.id">{{val.name}}</ion-option>
+        </ion-select>
+    </ion-item> 
+
+    <ion-card *ngFor="let row of bodypart" (click)="row.type=='Cardio'?Cardioexercise(row.id):Addexercise(row.id);">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/img/icon__workout.png">
+          </ion-avatar>
+          <h2>{{row.name}}</h2>
+        </ion-item>
+    </ion-card>
+
+  </ion-item-group>
+
+   
+  <ion-item-group *ngIf="segment === 'recent'">       
+    <ion-card *ngFor="let row of recent" (click)="row.type=='Cardio'?Cardioexercise(row.id):Addexercise(row.id);">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/img/icon__workout.png">
+          </ion-avatar>
+          <h2>{{row.name}}</h2>
+        </ion-item>
+    </ion-card>
+  </ion-item-group>
+
+  <ion-item-group *ngIf="segment === 'frequent'">       
+    <ion-card *ngFor="let row of recent" (click)="row.type=='Cardio'?Cardioexercise(row.id):Addexercise(row.id);">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/img/icon__workout.png">
+          </ion-avatar>
+          <h2>{{row.name}}</h2>
+        </ion-item>
+    </ion-card>
+  </ion-item-group>
+
+  <ion-list hidetag>
+    <ion-item>
+      <ion-select #mySelect [(ngModel)]="cardioitem" (ionChange)="Addexercise(mySelect.value)" interface="action-sheet">
+        <ion-option *ngFor="let row of cardioItems" [value]="row.id">{{row.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>  
+
+</ion-content>

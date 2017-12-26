@@ -14,6 +14,7 @@ import { NotesPage } from '../pages/notes/notes';
 import { NutritionPage } from '../pages/nutrition/nutrition';
 import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
 import {MeasurementPage} from '../pages/measurement/measurement';
+import {WorkoutPage} from '../pages/workout/workoutPage';
 
 
 export interface PageInterface {
@@ -38,7 +39,7 @@ export class GenomaxxApp {
     { title: 'Dashboard', name: 'MyhubPage', component: MyhubPage, icon: 'md-home' },
     { title: 'DNA Report', name: 'ReportPage', component:'' , icon: 'ios-paper' },    
     { title: 'Messages', name: 'MessagesPage', component: MessagesPage, icon: 'md-chatboxes' },
-    { title: 'Workouts', name: 'WorkoutPage', component: '', icon: 'md-document' },
+    { title: 'Workouts', name: 'WorkoutPage', component: WorkoutPage, icon: 'md-document' },
     { title: 'Nutrition', name: 'NutritionPage', component: NutritionPage, icon: 'md-restaurant' },
     { title: 'Shopping List', name: 'ShoppingListPage', component:ShoppingListPage, icon: 'ios-cart' },
     { title: 'Measurements', name: 'MeasurementPage', component: MeasurementPage, icon: 'ios-barcode' },

@@ -6,3 +6,4 @@ ionic cordova plugin add cordova-plugin-network-information
 npm install --save @ionic-native/network
 
 npm install ion2-calendar moment --save
+

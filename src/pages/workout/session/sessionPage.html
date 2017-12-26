@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Start Session</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >	
+
+    <ion-item-group>
+
+      <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime type="datetime-local" pickerFormat="DD MMM YYYY" displayFormat="DD/MM/YYYY" [(ngModel)]="paramdata.date" name="date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Time</ion-label>
+          <ion-datetime type="datetime-local" displayFormat="HH:mm" pickerFormat="h m a" [(ngModel)]="paramdata.time" name="time"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Follow Workout Template?</ion-label>
+        <ion-toggle [(ngModel)]="paramdata.followtemp" color="primary"></ion-toggle>
+      </ion-item>
+
+      <ion-item *ngIf="paramdata.followtemp">
+        <ion-label>Workout</ion-label>
+        <ion-select [(ngModel)]="paramdata.temp_id" >
+            <ion-option disabled>Assigned Workouts</ion-option>
+            <ion-option *ngFor="let row of default_temp" [value]="row.id" >{{row.name}}</ion-option>  
+            <ion-option disabled>My Workouts</ion-option>
+            <optgroup label="My Workouts"> 
+              <ion-option *ngFor="let row of my_temp" [value]="row.id" >{{row.name}}</ion-option>
+            </optgroup>   
+        </ion-select>
+      </ion-item>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="startSession()" block>START</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-item-group>  
+
+</ion-content>

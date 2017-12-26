@@ -1,0 +1,78 @@
+<ion-header>
+<ion-toolbar>
+    <ion-title>{{exercise.name}}</ion-title>
+  <ion-buttons end>
+        <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+  <ion-list *ngIf="activated && response" >
+
+    <ion-item *ngIf="response.file !='' && response.file_type =='image'">
+      <img src="{{response.file}}" />
+    </ion-item>
+
+    <ion-item *ngIf="response.file !='' && response.file_type =='video'">
+      <iframe [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+          <ion-row>
+            <ion-col col-6 text-right> Type </ion-col>
+            <ion-col col-6 text-left> {{response.type}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6 text-right text-wrap> Main Muscle Worked </ion-col>
+            <ion-col col-6 text-left text-wrap> {{response.bodypart}} </ion-col>
+          </ion-row>
+
+          <div *ngIf="response.other_muscles!=''">
+            <ion-row *ngFor="let muscle of response['other_muscles'].split(',')">
+              <ion-col col-6 text-right text-wrap> Other Muscles </ion-col>
+              <ion-col col-6 text-left text-wrap> {{muscle}} </ion-col>
+            </ion-row>
+          </div>
+
+          <ion-row>
+            <ion-col col-6 text-right> Equipment </ion-col>
+            <ion-col col-6 text-left text-wrap> {{response.equipment}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6 text-right> Machine Type </ion-col>
+            <ion-col col-6 text-left text-wrap> {{response.machine_type}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6 text-right> Level </ion-col>
+            <ion-col col-6 text-left> {{response.level}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6 text-right> Sport </ion-col>
+            <ion-col col-6 text-left> {{response.sport}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6 text-right> Force </ion-col>
+            <ion-col col-6 text-left> {{response.force}} </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-item>
+
+    <ion-item text-wrap *ngIf="response.description">
+      <h2>EXERCISE DESCRIPTION</h2>
+
+      <div [innerHTML]="response.description | safeHtml"></div>
+    </ion-item>  
+
+  </ion-list>  
+
+  <ion-list *ngIf="activated && !response">
+     <ion-item text-center>
+       <button ion-button color="danger" clear>No Info Found</button>
+    </ion-item>  
+
+  </ion-list>  
+
+</ion-content>
