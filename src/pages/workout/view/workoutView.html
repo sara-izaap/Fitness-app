@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>View Workout</ion-title>
+    <ion-buttons *ngIf="notes" end>
+        <button (click)="OpenNote()"><ion-icon name="md-document" ion-icon-large> </ion-icon></button >
+    </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >	
+  
+  <ion-card no-shadow>
+    <ion-card-content>
+      <h2>{{workout.name}}</h2>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let row of workoutData">
+          
+      <ion-item-divider mode="ios" text-wrap (click)="ExerciseInfo(row)">
+          <ion-avatar item-start>
+            <img src="assets/img/icon__workout.png">
+          </ion-avatar>
+          <h3>{{row.exercise_name}}</h3>           
+      </ion-item-divider>
+      
+      <ion-item *ngFor="let val of row['data']">
+        <ion-grid>
+          <ion-row *ngFor="let en of val;let i=index ">
+            <ion-col col-6 text-right> {{row['viewcol'][i]}} : </ion-col>
+            <ion-col col-6 text-left> {{en?en:row['viewcol'][i]}} </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>  
+  
+      <ion-item text-wrap>
+          <p>{{row.notes}}</p>
+      </ion-item>
+  </ion-card> 	
+
+</ion-content>

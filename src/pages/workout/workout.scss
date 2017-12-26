@@ -1,0 +1,56 @@
+page-logWorkout,workout-history{
+  
+  .grid{padding:0 !important}
+  .item{padding-left:5px}
+
+  [workouttable] {border-bottom: 0!important;
+
+   ion-label { font-size:1.2rem;margin-right: 0;}
+
+ }
+
+  table {width: 100%;text-align: center;
+     
+     td,th{border-top: 1px solid #ddd; border: 1px solid #ddd; padding: 5px; }
+  }
+
+}
+
+[hidetag]{display:none}
+
+.dumbell-back{
+
+  background: map-get($colors, primary) !important;
+  border-radius: 50%;
+  padding: 6px;
+
+  img{      
+      border-radius: 50%;
+      overflow: hidden;
+      width: 24px !important;
+      height: 24px !important;
+  }
+}
+
+.timer-button {
+    font-size: 4rem !important;
+    height: 1em !important;
+  }
+
+  [timer-play] {
+    font-size: 6rem !important;
+  }
+
+.alert-radio-label {
+   white-space: normal!important;
+}
+
+[workoutinfo-button] {
+
+  .label{ margin:0 !important;}
+
+  button{border-radius: 50px; margin:0 !important;font-size:1rem; height: 25px;width: 25px;line-height: 25px;}
+}
+
+
+

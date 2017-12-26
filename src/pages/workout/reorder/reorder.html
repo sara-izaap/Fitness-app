@@ -1,0 +1,19 @@
+
+<ion-header>
+	<ion-toolbar>
+	  <ion-title>Change Exercise Order</ion-title>
+	  <ion-buttons end>
+	        <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+	  </ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+	  <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
+	  	<ion-card *ngFor="let item of workoutdata">
+	    	<ion-item text-wrap>{{ item.exercise_name }}</ion-item>
+		</ion-card>
+	  </ion-item-group>
+	</ion-list>
+</ion-content>	

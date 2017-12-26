@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Workouts</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >	
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-searchbar [(ngModel)]="searchKey" (ionInput)="onInput()" placeholder="Search Workouts" ></ion-searchbar>
+
+	  <ion-segment mode="md" [(ngModel)]="segment" custom-segment>
+	    <ion-segment-button value="assigned" >
+	      ASSIGNED
+	    </ion-segment-button>
+	    <ion-segment-button value="myworkout">
+	      MY WORKOUTS
+	    </ion-segment-button>	   
+  	</ion-segment>
+    
+    <ion-item-group *ngIf="segment === 'assigned'">
+    	 
+       <ion-card *ngFor="let row of assigned" (click)="viewworkout(row)">
+        <ion-item text-wrap>
+          <ion-avatar item-start class="dumbell-back">
+            <img src="assets/img/dumbbell.png">
+          </ion-avatar>
+          <h2>{{row.name}}</h2>
+        </ion-item>       
+      </ion-card>
+    </ion-item-group>  
+
+    <ion-item-group *ngIf="segment === 'myworkout'">
+        
+        <ion-card *ngFor="let row of myworkout" (click)="viewworkout(row)">
+          <ion-item text-wrap>
+            <ion-avatar item-start class="dumbell-back">
+              <img src="assets/img/dumbbell.png">
+            </ion-avatar>
+            <h2>{{row.name}}</h2>
+          </ion-item>   
+      </ion-card>
+
+    </ion-item-group> 
+	
+	 <ion-fab right bottom #fab>
+        <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+          <span class="tooltip-label">Start Session</span>
+          <button ion-fab (click)="StartSession(fab)"><ion-icon name="md-restaurant"></ion-icon></button>     
+        </ion-fab-list>
+    </ion-fab>
+
+</ion-content>

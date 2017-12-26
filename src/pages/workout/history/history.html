@@ -1,0 +1,96 @@
+<ion-header>
+<ion-toolbar>
+    <ion-title>History for {{historydata.name}}</ion-title>
+  <ion-buttons end>
+        <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment  mode="md" [(ngModel)]="segment" custom-segment>
+    <ion-segment-button value="workout">
+      THIS WORKOUT
+    </ion-segment-button>
+    <ion-segment-button value="all">
+      ALL WORKOUTS
+    </ion-segment-button>    
+  </ion-segment>
+  
+  <div *ngIf="segment === 'workout'"> 
+
+    <ion-list *ngIf="workout.length == 0" padding>
+      <ion-item text-center text-wrap> <p>Currently there is no data for this exercise</p></ion-item>
+    </ion-list>      
+
+    <ion-card *ngFor="let row of workout; let p=index ">
+
+      <ion-item-divider mode="ios" text-wrap> {{row.date | date:'dd MMM yyyy'}}    </ion-item-divider>
+            
+        <ion-item workouttable>
+          <table>
+            <thead>
+                <tr>
+                  <th>Set</th>
+                  <th *ngFor="let head of row['viewcol']"> {{head}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of row['data'];let i=index ">
+
+                  <td>{{i+1}}</td>
+
+                  <td *ngFor="let en of val;let j=index "> 
+                    <span>{{en}}</span>     
+                  </td>               
+                </tr>  
+                     
+            </tbody>
+          </table>
+        </ion-item>  
+
+    </ion-card> 
+
+  </div>
+
+  <div *ngIf="segment === 'all'">  
+
+    <ion-list *ngIf="allworkout.length == 0" padding>
+      <ion-item text-center text-wrap> <p>Currently there is no data for this exercise</p></ion-item>
+    </ion-list>
+
+    <ion-card *ngFor="let row of allworkout; let p=index ">
+
+      <ion-item-divider mode="ios" text-wrap> {{row.date | date:'dd MMM yyyy'}}    </ion-item-divider>
+            
+        <ion-item workouttable>
+          <table>
+            <thead>
+                <tr>
+                  <th>Set</th>
+                  <th *ngFor="let head of row['viewcol']"> {{head}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of row['data'];let i=index ">
+
+                  <td>{{i+1}}</td>
+
+                  <td *ngFor="let en of val;let j=index "> 
+                    <span>{{en}}</span>     
+                  </td>               
+                </tr>  
+                     
+            </tbody>
+
+          </table>
+
+        </ion-item>  
+
+    </ion-card> 
+
+  </div>  
+
+
+</ion-content>
