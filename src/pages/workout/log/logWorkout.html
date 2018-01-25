@@ -82,14 +82,16 @@
 
                     <td *ngIf="row.allow_set == 'Y'">{{i+1}}</td>
 
-                    <td *ngFor="let en of val;let j=index ">                     
+                    <td *ngFor="let en of val;let j=index "  inlineedit>                    
                             
-                        <span *ngFor="let num of en.split(':');let k = index " >
-                          <span *ngIf="k == '1'"> : </span>
-                          
-                          <span *ngIf="row['nonedit'][j] === true" #e1 contenteditable="true" (blur)="setEditVal(p,i,j,k,e1.innerText)" [contenteditableModel]="num"></span>
+                        <span *ngFor="let num of en.split(':');let k = index " class="inedit_{{en.split(':').length}}">
 
-                          <span *ngIf="row['nonedit'][j] === false" #e1 contenteditable="false" (blur)="setEditVal(p,i,j,k,e1.innerText)" [contenteditableModel]="num"></span>                     
+                          <span *ngIf="k == '1'"> : </span>
+
+                          <input *ngIf="row['nonedit'][j] === true" class="exalign{{k}}" #e1 type="number" maxlength="3" [value]="num" (blur)="setEditVal(p,i,j,k,e1.value)" (focus)="selectNum($event)" />
+
+                        <!--   <span *ngIf="row['nonedit'][j] === true" #e1 contenteditable="true" (blur)="setEditVal(p,i,j,k,e1.innerText)" [contenteditableModel]="num"></span> -->
+                          <span *ngIf="row['nonedit'][j] === false">{{num}}</span>                     
                         </span>
                     </td>
                     <td>
@@ -147,7 +149,7 @@
         <ion-item text-center text-wrap> <p>Is there anything that you'd like to note about this workout?</p></ion-item>
 
         <ion-item> 
-            <ion-textarea [(ngModel)]="workout_notes" name="workout_notes" ></ion-textarea>
+            <ion-textarea [(ngModel)]="workout_notes" name="workout_notes" class="finishwork-note"></ion-textarea>
         </ion-item>
 
         <ion-item>

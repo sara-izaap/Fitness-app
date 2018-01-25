@@ -15,6 +15,8 @@ import { NutritionPage } from '../pages/nutrition/nutrition';
 import { ShoppingListPage } from '../pages/shoppinglist/shoppingList';
 import {MeasurementPage} from '../pages/measurement/measurement';
 import {WorkoutPage} from '../pages/workout/workoutPage';
+import {ProgressPicPage} from "../pages/progresspic/progressPic";
+import {CalendarPage} from "../pages/calendar/calendarPage";
 
 
 export interface PageInterface {
@@ -43,8 +45,8 @@ export class GenomaxxApp {
     { title: 'Nutrition', name: 'NutritionPage', component: NutritionPage, icon: 'md-restaurant' },
     { title: 'Shopping List', name: 'ShoppingListPage', component:ShoppingListPage, icon: 'ios-cart' },
     { title: 'Measurements', name: 'MeasurementPage', component: MeasurementPage, icon: 'ios-barcode' },
-    { title: 'Progress Photos', name: 'ProgressPage', component: '', icon: 'md-images' },
-    { title: 'Calender', name: 'CalenderPage', component: '', icon: 'md-calendar' },
+    { title: 'Progress Photos', name: 'ProgressPicPage', component: ProgressPicPage, icon: 'md-images' },
+    { title: 'Calendar', name: 'CalendarPage', component: CalendarPage, icon: 'md-calendar' },
     { title: 'Notes', name: 'NotesPage', component: NotesPage, icon: 'ios-copy' },
     { title: 'Settings', name: 'SettingsPage', component: SettingsPage, icon: 'md-settings' }
   ];

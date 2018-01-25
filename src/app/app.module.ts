@@ -5,6 +5,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 import { CalendarModule } from "ion2-calendar";
+import { NgCalendarModule  } from 'ionic2-calendar';
+import { Camera } from '@ionic-native/camera';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,11 +42,13 @@ import {SafeHtmlPipe} from '../pages/workout/safeHtmlPipe';
 import {WorkoutNote} from '../pages/workout/workoutNote';
 import {SessionPage} from '../pages/workout/session/sessionPage';
 import {LogWorkout} from '../pages/workout/log/logWorkout';
-import {ContenteditableModel} from '../pages/workout/contenteditable-model';
 import {Stopwatch} from '../pages/workout/timer/stopwatch';
 import {AdddExercisePage} from "../pages/workout/addexercise/addExercise";
 import {ReorderPage} from "../pages/workout/reorder/reorder";
 import {HistoryPage} from "../pages/workout/history/history";
+import {ProgressPicPage} from "../pages/progresspic/progressPic";
+import {ViewprogressPhoto} from "../pages/progresspic/view/viewImage";
+import {CalendarPage} from "../pages/calendar/calendarPage";
 
 import {GlobalVars} from "../providers/globalVars";
 import { UserService } from '../providers/userService';
@@ -85,15 +89,17 @@ import { WorkoutService } from '../providers/workoutService';
     WorkoutNote,
     SessionPage,
     LogWorkout,
-    ContenteditableModel,
     Stopwatch,
     AdddExercisePage,
     ReorderPage,
-    HistoryPage
+    HistoryPage,
+    ProgressPicPage,
+    ViewprogressPhoto,
+    CalendarPage
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpModule,    
     IonicModule.forRoot(GenomaxxApp, {}, {
       links: [
             { component: LoginPage, name: 'LoginPage', segment: 'login' },
@@ -105,10 +111,14 @@ import { WorkoutService } from '../providers/workoutService';
             { component: NutritionPage, name: 'NutritionPage', segment: 'Nutrition' },
             { component: ShoppingListPage, name: 'ShoppingListPage', segment: 'ShoppingList' },
             { component: MeasurementPage, name: 'MeasurementPage', segment: 'Measurements' },
-            { component: WorkoutPage, name: 'WorkoutPage', segment: 'Workouts' } 
+            { component: WorkoutPage, name: 'WorkoutPage', segment: 'Workouts' }, 
+            { component: ProgressPicPage, name: 'ProgressPicPage', segment: 'Progress Photos' },
+            { component: CalendarPage, name: 'CalendarPage', segment: 'Calendar' }
+             
       ]
     }),
     IonicStorageModule.forRoot(),
+    NgCalendarModule,
     CalendarModule
   ],
   bootstrap: [IonicApp],
@@ -143,11 +153,15 @@ import { WorkoutService } from '../providers/workoutService';
     Stopwatch,
     AdddExercisePage,
     ReorderPage,
-    HistoryPage
+    HistoryPage,
+    ProgressPicPage,
+    ViewprogressPhoto,
+    CalendarPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Network,
+    Camera,
     GlobalVars,
     UserService,
     AuthService,

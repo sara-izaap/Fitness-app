@@ -98,6 +98,10 @@ export class LogWorkout {
     }
   }
 
+  selectNum(event:any){
+    event.target.select();
+  }
+
   AddSet(pos:any,exercise_id:number,set_type:string){
 
     this.zonedetect.run(() => {
@@ -194,7 +198,6 @@ export class LogWorkout {
       reorderExercise.onDidDismiss(data => {
         if(data && data instanceof Object){
           this.workoutData = data;
-          console.log(this.workoutData);
         }
       })
   } 

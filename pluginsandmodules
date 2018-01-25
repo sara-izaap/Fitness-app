@@ -7,3 +7,9 @@ npm install --save @ionic-native/network
 
 npm install ion2-calendar moment --save
 
+ionic cordova plugin add cordova-plugin-camera
+npm install --save @ionic-native/camera
+
+npm install ionic2-calendar --save
+npm install intl --save
+

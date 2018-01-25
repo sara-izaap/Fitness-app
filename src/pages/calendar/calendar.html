@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title (click)="openCalendar()">{{calendar.currentDate | date:'dd MMM yyyy'}} <ion-icon name="md-arrow-dropdown"></ion-icon></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="has-header">
+
+    <calendar *ngIf="isEventsloaded" [eventSource]="eventSource"
+              [calendarMode]="calendar.mode"
+              [currentDate]="calendar.currentDate"
+              (onCurrentDateChanged)="onCurrentDateChanged($event)"
+              (onEventSelected)="onEventSelected($event)"
+              step="30">
+    </calendar>
+
+    <ion-fab right bottom #fab>
+        <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+          <span class="tooltip-label">Start Session</span>
+          <button ion-fab (click)="StartSession(fab)" workoutfab><img src="assets/img/dumbbell.png" /></button>     
+        </ion-fab-list>
+    </ion-fab>
+    
+</ion-content>
+

@@ -7,6 +7,8 @@ import { GlobalVars } from '../../providers/globalVars';
 import { PlansPage } from '../nutrition/plans/plans';
 import {MeasurementPage} from '../measurement/measurement';
 import {SessionPage} from '../workout/session/sessionPage';
+import {ProgressPicPage} from "../progresspic/progressPic";
+import { WorkoutView } from '../workout/view/workoutView';
 
 
 @Component({
@@ -17,7 +19,8 @@ export class MyhubPage {
  
   segment = 'start';
   activity:any={};
-  nutrition:any;
+  gmtplus:any;
+  custname:string;
 
   constructor(
     public navCtrl: NavController,
@@ -27,14 +30,17 @@ export class MyhubPage {
   {
     this.globalVar.getUserdata().then((data) => {
       data = JSON.parse(data);
+
+      this.custname = data.first_name;
       
       this.userservice.get_activities(data.id).then(res =>{
             this.activity = res.data;
-            this.nutrition =  res.nutrition;
       })
       .catch(error => console.log(error));
 
     });
+
+    this.gmtplus =  5*24*60*60;
 
   }
 
@@ -42,16 +48,58 @@ export class MyhubPage {
 
     let date:any = new Date();
 
-    if(type == 'nutrition')
-        this.navCtrl.push(PlansPage,date);
+    switch(type) { 
 
-    if(type == 'measurement')
-      this.navCtrl.push(MeasurementPage);
-
-    if(type == 'workout')
-      this.navCtrl.push(SessionPage);
-      
+      case "nutrition": 
+          this.navCtrl.push(PlansPage,date); 
+          break; 
+        
+      case "measurement":  
+          this.navCtrl.push(MeasurementPage);
+          break; 
+        
+      case "workout":
+          this.navCtrl.push(SessionPage);
+          break;    
+        
+      case "progress":
+          this.navCtrl.push(ProgressPicPage);
+          break; 
+         
+      default:  
+          console.log("Invalid choice"); 
+          break;              
+        
+    }      
     
+  }
+
+  openLog(data:any,type:string){
+
+    switch(type) { 
+
+      case "nutrition": 
+          let date:any = new Date(data.action_date);
+          this.navCtrl.push(PlansPage,date); 
+          break; 
+        
+      case "measurement":  
+          this.navCtrl.push(MeasurementPage,{id:data.action_id,type:data.sub_type});
+          break; 
+        
+      case "workout":
+          this.navCtrl.push(WorkoutView,{id:data.action_id});
+          break;    
+        
+      case "progress":
+          this.navCtrl.push(ProgressPicPage);
+          break; 
+         
+      default:  
+          console.log("Invalid choice"); 
+          break;              
+        
+    }      
   }
 
   

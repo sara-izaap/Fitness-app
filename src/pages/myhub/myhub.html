@@ -38,7 +38,7 @@
             </div>
           </ion-col>
 
-          <ion-col col-6>
+          <ion-col col-6 (click)="openmodule('progress')" >
             <div custom__col>
               <img src="assets/img/icon__pic.png" alt="">
               <h3 get__text="Add">Progress Pic.</h3>
@@ -69,21 +69,55 @@
       </ion-row>
     </div>
   
-</ion-grid>
+    </ion-grid>
 
   </ion-list>
 
-  <ion-list *ngIf="segment === 'activity'">
-    
-    <ion-item *ngFor="let log of activity">
-        <h2 class="card-title">{{log.action}}</h2>
-        <p>{{log.message}}</p>
+  <ion-list *ngIf="segment === 'activity'" padding>
+    <ion-item activityusr>&nbsp;</ion-item>
+
+    <div *ngFor="let log of activity">
+    <ion-card>
+      <ion-icon class="activity-icon"><img *ngIf="log.action == 'workout'" src="assets/img/activity-dum.png" /></ion-icon>
+      <ion-icon *ngIf="log.action == 'nutrition'" class="activity-icon" name="md-restaurant"></ion-icon>
+      <ion-icon *ngIf="log.action == 'measurement'" class="activity-icon" name="ios-barcode"></ion-icon>
+      <ion-icon *ngIf="log.action == 'progressphoto'" class="activity-icon" name="md-camera"></ion-icon>
+      <ion-item>
+          <p text-wrap> {{log.message}}
+            <span *ngIf="log.action == 'nutrition'" (click)="openLog(log,'nutrition')" primarycolor> {{log.link}} </span>
+            <span *ngIf="log.action == 'workout'" (click)="openLog(log,'workout')" primarycolor> {{log.link}} </span>
+            <span *ngIf="log.action == 'measurement'" (click)="openLog(log,'measurement')" primarycolor> {{log.link}} </span>
+            <span *ngIf="log.action == 'progressphoto'" (click)="openLog(log,'progress')" primarycolor [innerHTML]="log.link"> </span>
+          </p>         
+      </ion-item>      
+    </ion-card>
+    <ion-item activityusr>
+        <p><span primarycolor>{{custname}}</span> {{log.created_date - gmtplus | timeAgo}}</p>         
     </ion-item>
+  </div>
 
   </ion-list>
 
   <ion-list-header *ngIf="!activity">
       No activities Found
   </ion-list-header>
+
+  <ion-fab *ngIf="segment === 'activity'" right bottom #fab>
+    <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      
+      <span class="tooltip-activity">Start Session</span>
+      <button ion-fab (click)="openmodule('workout')" workoutfab><img src="assets/img/dumbbell.png" /></button>
+      
+      <span class="tooltip-activity">Log Nutrition</span>
+      <button ion-fab (click)="openmodule('nutrition')"><ion-icon name="md-restaurant"></ion-icon></button> 
+      
+      <span class="tooltip-activity">Update Measurements</span>
+      <button ion-fab (click)="openmodule('measurement')"><ion-icon name="ios-barcode"></ion-icon></button>
+      
+      <span class="tooltip-activity">Add Progress Photo</span>
+      <button ion-fab (click)="openmodule('progress')"><ion-icon name="md-camera"></ion-icon></button>      
+    </ion-fab-list>
+</ion-fab>
 
 </ion-content>

@@ -132,4 +132,31 @@ export class UserService {
             .toPromise();
     }
 
+    getProgressPhotos(userid:number){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(apiUrl + 'user/progressphotos?user_id='+userid, options).map(res => res.json())
+            .toPromise();
+    }
+
+    photoUpload(postdata:any){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(apiUrl + 'user/savephoto', postdata, options).map(res => res.json())
+            .toPromise();
+    }
+
+    getSessions(user_id:number,date:Date){
+
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(apiUrl + 'workout/calendarsessions?user_id='+user_id+'&date='+date, options).map(res => res.json())
+            .toPromise();
+    }
+
 }

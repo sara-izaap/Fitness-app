@@ -1,0 +1,21 @@
+
+<ion-content>
+
+  <ion-slides #slides zoom="true" pager="false">
+    <ion-slide>
+        <div class="swiper-zoom-container">
+            <img [src]="imgdata.photourl+imgdata.file_name" imageViewer>
+        </div>
+    </ion-slide>
+  </ion-slides>   
+        
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>   
+    <ion-title start>{{imgdata.created_date | date:'dd MMM yyyy'}}</ion-title> 
+    <ion-buttons end>
+          <button (click)="dismiss()"><ion-icon name="md-close-circle" ion-icon-large> </ion-icon></button >
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-footer>
