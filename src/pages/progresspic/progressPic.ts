@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController,LoadingController,Refresher,ToastController,ModalController} from 'ionic-angular';
+import * as moment from 'moment'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { GlobalVars } from '../../providers/globalVars';
 import { UserService } from '../../providers/userService';
@@ -35,6 +36,7 @@ export class ProgressPicPage {
     });
 
   }
+
 
   getProgresspic(){
 
@@ -129,6 +131,8 @@ export class ProgressPicPage {
 
     item['photourl'] = this.photourl;
 
+    item['created_date'] = moment(item['created_date']).local().format('YYYY-MM-DD');
+
     let viewImage =  this.modalCtrl.create(ViewprogressPhoto,{data:item});
 
     viewImage.present();
@@ -153,7 +157,7 @@ export class ProgressPicPage {
     })
     .catch(error => console.log(error));
    
-   }
+  }
 
   
 }

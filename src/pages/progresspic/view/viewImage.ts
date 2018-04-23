@@ -18,7 +18,7 @@ export class ViewprogressPhoto {
   }
 
   dismiss(){
-    this.viewCtrl.dismiss(false);   
+    this.viewCtrl.dismiss();   
   } 
 
   
